@@ -11,8 +11,11 @@
 	<link rel="stylesheet" type="text/css" href="tabs.css" />
 	<link rel="stylesheet" type="text/css" href="layout.css" />
 
+	<script src="microevent.js"></script>
+
 	<script src="angular.min.js"></script>
 	<script src="app.js"></script>
+	<script src="net.js"></script>
 
 </head>
 <body ng-controller="MainCtrl">
@@ -43,7 +46,7 @@
 
 	</div>
 	<div class="input">
-		<input type="text" class="message-field" ng-model="messageText" ng-enter="enterText()">
+		<input type="text" class="message-field" ng-model="messageText" ng-enter>
 	</div>
 	<div class="tools">
 		tools

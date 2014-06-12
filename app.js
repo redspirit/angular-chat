@@ -1,8 +1,23 @@
 var app = angular.module('ChatApp', []);
 
-app.controller('MainCtrl', function($scope, $sce, jq){
+
+function getFirst(obj) {
+	for (var i in obj) {
+		return i;
+	}
+
+}
+
+
+app.controller('MainCtrl', function($scope, $sce, jq, net){
 
 	var activeRoom;
+
+	var hitagi = new net.start('aniavatars.com:8080');
+
+	hitagi.bind('message', function(data){
+		console.log('SOCKET', data);
+	});
 
 
 	$scope.rooms = {
@@ -21,10 +36,10 @@ app.controller('MainCtrl', function($scope, $sce, jq){
 			]}
 	};
 
+	activeRoom = getFirst($scope.rooms);
+
 
 	$scope.tabClick = function(tab){
-
-
 		jq.$('.tabs-inset > li').removeClass('active-tab');
 		jq.$('#tab-'+tab).addClass('active-tab');
 
@@ -34,20 +49,28 @@ app.controller('MainCtrl', function($scope, $sce, jq){
 		activeRoom = tab;
 
 	}
-	$scope.enterText = function(){
+	$scope.enterText = function(text){
 
 		if(!activeRoom) return;
+		//var text = $scope.messageText;
 
 		$scope.rooms[activeRoom].messages.push({
 			user: 'Guest',
-			text: $scope.messageText
+			text: text
 		});
+
+		hitagi.send( text );
 
 	}
 
 	$scope.messageHtml = function(m){
 		return $sce.trustAsHtml(m);
 	}
+
+
+
+
+
 
 });
 
@@ -71,9 +94,8 @@ app.directive('ngEnter', function() {
 	return function($scope, element, attrs) {
 		element.bind("keydown keypress", function(event) {
 			if(event.which === 13 && $scope.messageText) {
-				$scope.$apply(function(){
-					$scope.$eval(attrs.ngEnter);
-				});
+				$scope.enterText($scope.messageText);
+				$scope.$apply();
 				element.val('');
 				$scope.messageText = '';
 				event.preventDefault();
