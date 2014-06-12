@@ -1,22 +1,18 @@
-var module = angular.module('ChatApp', []);
+var app = angular.module('ChatApp', []);
 
-module.controller('MainCtrl', function($scope, $sce){
+app.controller('MainCtrl', function($scope, $sce, jq){
 
 	var activeRoom;
 
-	$scope.some = '';
-	$scope.htmlbody = $sce.trustAsHtml('<b>room1</b>');
 
 	$scope.rooms = {
 		room1: {
-			name: 'room1',
 			title:'Room one',
 			messages: [
 				{user:'spirit', text:'my first message'},
 				{user:'spirit', text:'my second message'}
 			]},
 		room2: {
-			name: 'room2',
 			title:'Room two',
 			messages:[
 				{user:'admin', text:'hello to all'},
@@ -28,11 +24,12 @@ module.controller('MainCtrl', function($scope, $sce){
 
 	$scope.tabClick = function(tab){
 
-		$('.tabs-inset > li').removeClass('active-tab');
-		$('#tab-'+tab).addClass('active-tab');
 
-		$('.tabs-content > div').hide();
-		$('#tabcont-'+tab).show();
+		jq.$('.tabs-inset > li').removeClass('active-tab');
+		jq.$('#tab-'+tab).addClass('active-tab');
+
+		jq.$('.tabs-content > div').hide();
+		jq.$('#tabcont-'+tab).show();
 
 		activeRoom = tab;
 
@@ -54,8 +51,23 @@ module.controller('MainCtrl', function($scope, $sce){
 
 });
 
+app.service('jq', function(){
+	return {
+		$: function(query) {
+			var elem = angular.element(document.querySelectorAll(query));
+			elem.show = function() {
+				elem.css('display', 'block');
+			};
+			elem.hide = function() {
+				elem.css('display', 'none');
+			};
+			return elem;
+		}
+	}
+});
 
-module.directive('ngEnter', function() {
+
+app.directive('ngEnter', function() {
 	return function($scope, element, attrs) {
 		element.bind("keydown keypress", function(event) {
 			if(event.which === 13 && $scope.messageText) {
