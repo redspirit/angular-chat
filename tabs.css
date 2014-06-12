@@ -1,0 +1,52 @@
+#tabs .tabs-inset{
+	list-style: none;
+	overflow:hidden;
+	margin: 0;
+	padding: 0;
+}
+#tabs .tabs-inset li{
+	float:left;
+	padding:5px 20px;
+	/*background: rgb(233, 233, 233);*/
+	margin-right: 3px;
+	border: 1px solid black;
+	border-radius: 5px 5px 0 0;
+	cursor: pointer;
+	width: 110px;
+	height: 32px;
+	overflow: hidden;
+	border-bottom: none;
+}
+#tabs .tabs-inset li:hover{
+	background: gray;
+	color: white;
+}
+#tabs .tabs-inset li.active-tab{
+	background: gray;
+	color: white;
+}
+#tabs .tabs-inset li span{
+	width:8px;
+	height:8px;
+	background-color: red;
+	display: inline-block;
+	margin-left: 10px;
+	
+}
+#tabs .tabs-inset li span:hover{
+	background-color: black;	
+}
+#tabs .tabs-content{
+	
+}
+#tabs .tabs-content > div{
+	display:none;
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	top:32px;
+	overflow: hidden;
+	background: url('img/handmadepaper.png');
+}
+
