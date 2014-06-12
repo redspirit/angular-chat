@@ -1,8 +1,11 @@
 var module = angular.module('ChatApp', []);
 
-module.controller('MainCtrl', function($scope){
+module.controller('MainCtrl', function($scope, $sce){
 
 	var activeRoom;
+
+	$scope.some = '';
+	$scope.htmlbody = $sce.trustAsHtml('<b>room1</b>');
 
 	$scope.rooms = {
 		room1: {
@@ -23,12 +26,6 @@ module.controller('MainCtrl', function($scope){
 	};
 
 
-
-	$scope.addUser = function(a){
-
-		//$scope.spisok.push({dat: '<div class="message">empty room</div>'});
-
-	}
 	$scope.tabClick = function(tab){
 
 		$('.tabs-inset > li').removeClass('active-tab');
@@ -42,11 +39,17 @@ module.controller('MainCtrl', function($scope){
 	}
 	$scope.enterText = function(){
 
+		if(!activeRoom) return;
+
 		$scope.rooms[activeRoom].messages.push({
 			user: 'Guest',
 			text: $scope.messageText
 		});
 
+	}
+
+	$scope.messageHtml = function(m){
+		return $sce.trustAsHtml(m);
 	}
 
 });

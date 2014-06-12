@@ -2,7 +2,7 @@
 <html ng-app="ChatApp">
 <head>
 	<meta charset="utf-8" />
-	<title>Аниме чат NV</title>
+	<title>Angular chat</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,12 +17,12 @@
 
 </head>
 <body ng-controller="MainCtrl">
-
 <div class="wrap">
 	<div class="header">
-		<input class="btn" type="botton" value="добавить" ng-click="addUser(1)" />
+
+
 	</div>
-	<div id="tabs" ng-tabs>
+	<div id="tabs">
 
 		<ul class="tabs-inset">
 			<li ng-repeat="room in rooms" id="tab-{{room.name}}" ng-click="tabClick(room.name)">
@@ -33,17 +33,13 @@
 		<div class="tabs-content">
 			<div ng-repeat="room in rooms" id="tabcont-{{room.name}}">
 				<div ng-repeat="mess in room.messages">
-					<b>{{mess.user}}</b>: {{mess.text}}
+					<b>{{mess.user}}</b>: <span ng-bind-html="messageHtml(mess.text)"></span>
 				</div>
 			</div>
 		</div>
 
 	</div>
 	<div class="ulist">
-		<p>Total: {{spisok.length}}</p>
-
-
-		<div ng-repeat="elem in spisok" class="room">{{elem.dat}}</div>
 
 
 	</div>
