@@ -27,21 +27,46 @@
 	<div id="tabs">
 
 		<ul class="tabs-inset">
-			<li ng-repeat="(name, room) in rooms" id="tab-{{name}}" ng-click="tabClick(name)" ng-class="{'active-tab':$first}">
-				{{room.title}} <span></span>
+			<li ng-repeat="room in rooms" id="tab-{{room.name}}" ng-click="tabClick(room.name)" ng-class="{'active-tab':$first}">
+				{{room.caption}} <span></span>
 			</li>
 		</ul>
 
 		<div class="tabs-content">
-			<div ng-repeat="(name, room) in rooms" id="tabcont-{{name}}">
+			<div ng-repeat="room in rooms" id="tabcont-{{room.name}}">
 				<div ng-repeat="mess in room.messages">
-					<b>{{mess.user}}</b>: <span ng-bind-html="messageHtml(mess.text)"></span>
+					<b>{{mess.n}}</b>: <span ng-bind-html="messageHtml(mess.t)"></span>
 				</div>
 			</div>
 		</div>
 
 	</div>
 	<div class="ulist">
+
+
+		<table ng-repeat="user in users" class="user">
+			<tr>
+				<td rowspan="2" scope="col" class="cc1">
+					<img class="profava" src="{{user.avaurl}}" alt="" />
+				</td>
+				<td scope="col" style="padding-top:6px">
+					<img class="stateSign" src="img/pirat.png" alt="">
+					<div class="statetxt">Пират</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="cc2">
+					<img class="upriv" title="Пользователь" src="img/user.png" alt="">
+					<div class="usmenu" priv="4"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="cc3">
+					<div class="profnick" title="Юзер: 2770">{{user.nick}}</div>
+					<div class="ustatus">{{user.statustext}}</div>
+				</td>
+			</tr>
+		</table>
 
 
 	</div>

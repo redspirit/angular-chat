@@ -1,42 +1,48 @@
 var app = angular.module('ChatApp', []);
 
-
-function getFirst(obj) {
-	for (var i in obj) {
-		return i;
-	}
-
-}
-
-
-app.controller('MainCtrl', function($scope, $sce, jq, net){
+app.controller('MainCtrl', function($scope, $sce, jq, net, tools){
 
 	var activeRoom;
+	var nicks = {};
 
 	var hitagi = new net.start('aniavatars.com:8080');
 
-	hitagi.bind('message', function(data){
-		console.log('SOCKET', data);
+	hitagi.bind('open', function(data){
+		hitagi.auth();
+	});
+
+	hitagi.bind('auth', function(data){
+		hitagi.join('public');
 	});
 
 
-	$scope.rooms = {
-		room1: {
-			title:'Room one',
-			messages: [
-				{user:'spirit', text:'my first message'},
-				{user:'spirit', text:'my second message'}
-			]},
-		room2: {
-			title:'Room two',
-			messages:[
-				{user:'admin', text:'hello to all'},
-				{user:'guest', text:'i am zombie'},
-				{user:'guest', text: 'hohoho fofofo'}
-			]}
-	};
+	hitagi.bind('chat', function(data){
 
-	activeRoom = getFirst($scope.rooms);
+		$scope.rooms[activeRoom].messages.push({
+			u: data.u,
+			t: data.t,
+			n: nicks[data.u]
+		});
+		$scope.$apply();
+
+	});
+
+	hitagi.bind('joinroom', function(data){
+
+		$scope.rooms[data.name] = data;
+		$scope.$apply();
+		activeRoom = data.name;
+
+		for (var i in data.users) {
+			nicks[i] = data.users[i].nick;
+		}
+
+		console.log(nicks);
+
+	});
+
+
+	$scope.rooms = {};
 
 
 	$scope.tabClick = function(tab){
@@ -52,14 +58,8 @@ app.controller('MainCtrl', function($scope, $sce, jq, net){
 	$scope.enterText = function(text){
 
 		if(!activeRoom) return;
-		//var text = $scope.messageText;
 
-		$scope.rooms[activeRoom].messages.push({
-			user: 'Guest',
-			text: text
-		});
-
-		hitagi.send( text );
+		hitagi.chat(text, activeRoom);
 
 	}
 
@@ -89,6 +89,27 @@ app.service('jq', function(){
 	}
 });
 
+
+app.service('tools', function(){
+	return {
+		json_merge: function (json1, json2){
+			var out = {};
+			for(var k1 in json1){
+				if (json1.hasOwnProperty(k1)) out[k1] = json1[k1];
+			}
+			for(var k2 in json2){
+				if (json2.hasOwnProperty(k2)) {
+					if(!out.hasOwnProperty(k2)) out[k2] = json2[k2];
+					else if(
+						(typeof out[k2] === 'object') && (out[k2].constructor === Object) &&
+							(typeof json2[k2] === 'object') && (json2[k2].constructor === Object)
+						) out[k2] = json_merge_recursive(out[k2], json2[k2]);
+				}
+			}
+			return out;
+		}
+	}
+});
 
 app.directive('ngEnter', function() {
 	return function($scope, element, attrs) {
