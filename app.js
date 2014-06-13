@@ -21,7 +21,8 @@ app.controller('MainCtrl', function($scope, $sce, jq, net, tools){
 		$scope.rooms[activeRoom].messages.push({
 			u: data.u,
 			t: data.t,
-			n: nicks[data.u]
+			n: nicks[data.u],
+			d: tools.timestamp()
 		});
 		$scope.$apply();
 
@@ -37,7 +38,38 @@ app.controller('MainCtrl', function($scope, $sce, jq, net, tools){
 			nicks[i] = data.users[i].nick;
 		}
 
-		console.log(nicks);
+	});
+
+	hitagi.bind('userjoined', function(data){
+
+		$scope.rooms[data.room].users[data.name] = data.data;
+		nicks[data.name] = data.data.nick;
+
+		$scope.rooms[data.room].messages.push({
+			u: '',
+			t: '<b>' + nicks[data.name] + '</b> зашел в комнату',
+			n: '',
+			d: tools.timestamp(),
+			cls: {green: true}
+		});
+
+		$scope.$apply();
+
+	});
+
+	hitagi.bind('userleaved', function(data){
+
+		$scope.rooms[data.room].users[data.name] = undefined;
+
+		$scope.rooms[data.room].messages.push({
+			u: '',
+			t: '<b>' + nicks[data.name] + '</b> вышел из комнаты',
+			n: '',
+			d: tools.timestamp(),
+			cls: {red: true}
+		});
+
+		$scope.$apply();
 
 	});
 
@@ -63,12 +95,11 @@ app.controller('MainCtrl', function($scope, $sce, jq, net, tools){
 
 	}
 
-	$scope.messageHtml = function(m){
+	$scope.messageHtml = function(m) {
 		return $sce.trustAsHtml(m);
 	}
-
-
-
+	$scope.timeFormat = tools.timeFormat;
+	$scope.dateFormat = tools.dateFormat;
 
 
 
@@ -91,22 +122,21 @@ app.service('jq', function(){
 
 
 app.service('tools', function(){
+	var addZero = function(n){
+		return n < 10 ? '0' + n.toString() : n.toString();
+	}
 	return {
-		json_merge: function (json1, json2){
-			var out = {};
-			for(var k1 in json1){
-				if (json1.hasOwnProperty(k1)) out[k1] = json1[k1];
-			}
-			for(var k2 in json2){
-				if (json2.hasOwnProperty(k2)) {
-					if(!out.hasOwnProperty(k2)) out[k2] = json2[k2];
-					else if(
-						(typeof out[k2] === 'object') && (out[k2].constructor === Object) &&
-							(typeof json2[k2] === 'object') && (json2[k2].constructor === Object)
-						) out[k2] = json_merge_recursive(out[k2], json2[k2]);
-				}
-			}
-			return out;
+		timestamp: function() {
+			return Math.round(new Date().valueOf() / 1000);
+		},
+		dateFormat: function(date) {
+			var d = new Date(date * 1000);
+			return addZero(d.getDate()) + '.' + addZero(d.getMonth() + 1) + '.' + d.getFullYear() + ' '
+				+ addZero(d.getHours()) + ':' + addZero(d.getMinutes());
+		},
+		timeFormat: function(date) {
+			var d = new Date(date * 1000);
+			return addZero(d.getHours()) + ':' + addZero(d.getMinutes());
 		}
 	}
 });

@@ -34,6 +34,12 @@ app.service('net', function(){
 
 				self.trigger('chat', msg);
 
+			},
+			userjoined: function(msg) {
+				self.trigger('userjoined', msg);
+			},
+			userleaved: function(msg) {
+				self.trigger('userleaved', msg);
 			}
 		}
 

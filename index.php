@@ -37,7 +37,9 @@
 
 				<div class="room-messages">
 					<div ng-repeat="mess in room.messages">
-						<b>{{mess.n}}</b>: <span ng-bind-html="messageHtml(mess.t)"></span>
+						<span class="m-date" title="{{dateFormat(mess.d)}}">{{timeFormat(mess.d)}}</span>
+						<span class="m-nick">{{mess.n}}</span>
+						<span class="m-text" ng-bind-html="messageHtml(mess.t)" ng-class="mess.cls"></span>
 					</div>
 				</div>
 
@@ -45,7 +47,7 @@
 					<table ng-repeat="user in room.users" class="user">
 						<tr>
 							<td rowspan="2" scope="col" class="cc1">
-								<img class="profava" src="{{user.avaurl}}" alt="" />
+								<img class="profava" ng-src="{{user.avaurl}}" alt="" />
 							</td>
 							<td scope="col" style="padding-top:6px">
 								<img class="stateSign" src="img/pirat.png" alt="">

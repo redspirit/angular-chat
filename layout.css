@@ -18,8 +18,43 @@
 	width:220px;
 	background: url('img/bg2.png');
     border-left: 1px solid blue;
-	overflow: hidden;
+    overflow-y: scroll;
 }
+
+.roster .user {
+    font-size: 12px;
+    margin: 0 4px 2px 4px;
+    display: block;
+    color: #666;
+    clear: both;
+    border-bottom: 2px solid #059BD5;
+}
+.roster .label {
+    float: left;
+    width: 110px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.roster .profava {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    margin: 5px;
+}
+
+.roster .profnick {
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: -5px;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+
 .room-messages{
     position:absolute;
     left:0;
@@ -28,6 +63,8 @@
     top:32px;
     overflow-y: scroll;
     background: url('img/handmadepaper.png');
+    font-size: 16px;
+    padding-left: 4px;
 }
 .input{
 	position:absolute;
@@ -80,16 +117,23 @@
     margin-right: 50px;
 }
 
+.room-messages .m-date {
+    font-size: 75%;
+    font-style: italic;
+    color: gray;
+}
+.room-messages .m-nick {
+    font-weight: bold;
+    width: 120px;
+    display: inline-block;
+    padding-left: 2px;
+}
+.room-messages .m-text {
 
-.ps-container .ps-scrollbar-x-rail{position:absolute;bottom:3px;height:8px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;opacity:0;filter:alpha(opacity=0);-o-transition:background-color .2s linear,opacity .2s linear;-webkit-transition:background-color.2s linear,opacity .2s linear;-moz-transition:background-color .2s linear,opacity .2s linear;transition:background-color .2s linear,opacity .2s linear}
-.ps-container:hover .ps-scrollbar-x-rail,.ps-container.hover .ps-scrollbar-x-rail{opacity:.6;filter:alpha(opacity=60)}
-.ps-container .ps-scrollbar-x-rail:hover,.ps-container .ps-scrollbar-x-rail.hover{background-color:#eee;opacity:.9;filter:alpha(opacity=90)}
-.ps-container .ps-scrollbar-x-rail.in-scrolling{opacity:.9;filter:alpha(opacity=90)}
-.ps-container .ps-scrollbar-y-rail{position:absolute;right:3px;width:8px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;opacity:0;filter:alpha(opacity=0);-o-transition:background-color .2s linear,opacity .2s linear;-webkit-transition:background-color.2s linear,opacity .2s linear;-moz-transition:background-color .2s linear,opacity .2s linear;transition:background-color .2s linear,opacity .2s linear}
-.ps-container:hover .ps-scrollbar-y-rail,.ps-container.hover .ps-scrollbar-y-rail{opacity:.6;filter:alpha(opacity=60)}
-.ps-container .ps-scrollbar-y-rail:hover,.ps-container .ps-scrollbar-y-rail.hover{background-color:#eee;opacity:.9;filter:alpha(opacity=90)}
-.ps-container .ps-scrollbar-y-rail.in-scrolling{opacity:.9;filter:alpha(opacity=90)}
-.ps-container .ps-scrollbar-x{position:absolute;bottom:0;height:8px;background-color:#aaa;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-o-transition:background-color .2s linear;-webkit-transition:background-color.2s linear;-moz-transition:background-color .2s linear;transition:background-color .2s linear}.ps-container.ie6 .ps-scrollbar-x{font-size:0}
-.ps-container .ps-scrollbar-x-rail:hover .ps-scrollbar-x,.ps-container .ps-scrollbar-x-rail.hover .ps-scrollbar-x{background-color:#999}
-.ps-container .ps-scrollbar-y{position:absolute;right:0;width:8px;background-color:#aaa;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-o-transition:background-color .2s linear;-webkit-transition:background-color.2s linear;-moz-transition:background-color .2s linear;transition:background-color .2s linear}
-.ps-container.ie .ps-scrollbar-y{font-size:0}.ps-container .ps-scrollbar-y-rail:hover .ps-scrollbar-y,.ps-container .ps-scrollbar-y-rail.hover .ps-scrollbar-y{background-color:#999}
+}
+.green{
+    color: green;
+}
+.red{
+    color:red;
+}
