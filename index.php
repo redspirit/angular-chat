@@ -34,40 +34,44 @@
 
 		<div class="tabs-content">
 			<div ng-repeat="room in rooms" id="tabcont-{{room.name}}">
-				<div ng-repeat="mess in room.messages">
-					<b>{{mess.n}}</b>: <span ng-bind-html="messageHtml(mess.t)"></span>
+
+				<div class="room-messages">
+					<div ng-repeat="mess in room.messages">
+						<b>{{mess.n}}</b>: <span ng-bind-html="messageHtml(mess.t)"></span>
+					</div>
 				</div>
+
+				<div class="roster">
+					<table ng-repeat="user in room.users" class="user">
+						<tr>
+							<td rowspan="2" scope="col" class="cc1">
+								<img class="profava" src="{{user.avaurl}}" alt="" />
+							</td>
+							<td scope="col" style="padding-top:6px">
+								<img class="stateSign" src="img/pirat.png" alt="">
+								<div class="statetxt">Пират</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="cc2">
+								<img class="upriv" title="Пользователь" src="img/user.png" alt="">
+								<div class="usmenu" priv="4"></div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="cc3">
+								<div class="profnick" title="Юзер: 2770">{{user.nick}}</div>
+								<div class="ustatus">{{user.statustext}}</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+
 			</div>
+
+
+
 		</div>
-
-	</div>
-	<div class="ulist">
-
-
-		<table ng-repeat="user in users" class="user">
-			<tr>
-				<td rowspan="2" scope="col" class="cc1">
-					<img class="profava" src="{{user.avaurl}}" alt="" />
-				</td>
-				<td scope="col" style="padding-top:6px">
-					<img class="stateSign" src="img/pirat.png" alt="">
-					<div class="statetxt">Пират</div>
-				</td>
-			</tr>
-			<tr>
-				<td class="cc2">
-					<img class="upriv" title="Пользователь" src="img/user.png" alt="">
-					<div class="usmenu" priv="4"></div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" class="cc3">
-					<div class="profnick" title="Юзер: 2770">{{user.nick}}</div>
-					<div class="ustatus">{{user.statustext}}</div>
-				</td>
-			</tr>
-		</table>
-
 
 	</div>
 	<div class="input">
