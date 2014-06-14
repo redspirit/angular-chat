@@ -2,17 +2,34 @@ var app = angular.module('ChatApp', []);
 
 app.controller('MainCtrl', function($scope, $sce, net, tools){
 
+	$scope.rooms = {};
+	$scope.me = {
+		login: 'u172144439'
+	}
+
 	var activeRoom;
 	var nicks = {};
 	var roomsIndex = 0;
+	var myLogin = 'u172144439';
 
 	var hitagi = new net.start('aniavatars.com:8080');
 
 	hitagi.bind('open', function(data){
-		hitagi.auth();
+		//hitagi.auth();
 	});
 
 	hitagi.bind('auth', function(data){
+		$scope.me = {
+			login: data.login,
+			nick: data.nickname,
+			state: data.state,
+			avaurl: data.url,
+			statustext: data.statustext,
+			commpriv: data.privilege,
+			textcolor: data.textcolor
+		}
+		$scope.$apply();
+
 		hitagi.join('public');
 	});
 
@@ -31,11 +48,12 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 
 	});
 
-	hitagi.bind('joinroom', function(data){
+	hitagi.bind('joinRoom', function(data){
 
 		roomsIndex++;
 		$scope.rooms[data.name] = data;
 		$scope.rooms[data.name].index = roomsIndex;
+		$scope.rooms[data.name].type = 'room';
 
 		$scope.$apply();
 		activeRoom = data.name;
@@ -49,7 +67,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 
 	});
 
-	hitagi.bind('userjoined', function(data){
+	hitagi.bind('userJoined', function(data){
 
 		$scope.rooms[data.room].users[data.name] = data.data;
 		nicks[data.name] = data.data.nick;
@@ -67,7 +85,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 
 	});
 
-	hitagi.bind('userleaved', function(data){
+	hitagi.bind('userLeaved', function(data){
 
 		delete $scope.rooms[data.room].users[data.name];
 
@@ -84,7 +102,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 
 	});
 
-	hitagi.bind('leaveroom', function(data){
+	hitagi.bind('leaveRoom', function(data){
 		delete $scope.rooms[data.room];
 		$scope.$apply();
 
@@ -92,7 +110,66 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 		tools.selectRoom(activeRoom);
 	});
 
-	$scope.rooms = {};
+	hitagi.bind('getMessages', function(data){
+
+		var roomName = 'pm-' + data.user.login;
+		var users = {};
+
+		users[data.user.login] = data.user;
+		users[myLogin] = $scope.me;
+
+		roomsIndex++;
+		$scope.rooms[roomName] = {
+			messages: data.messages,
+			index: roomsIndex,
+			caption: data.user.nick,
+			name: roomName,
+			user: data.user.login,
+			type: 'pm',
+			users: users
+		}
+		$scope.$apply();
+		activeRoom = roomName;
+
+		nicks[data.user.login] = data.user.nick;
+
+		tools.selectRoom(activeRoom);
+		tools.toBottom(activeRoom);
+
+	});
+
+	hitagi.bind('newMess', function(data){
+
+		var room;
+
+		if(data.u == myLogin) {
+			room = 'pm-' + data.r;
+		} else {
+			room = 'pm-' + data.u;
+		}
+
+
+		if($scope.rooms[room]) {
+			// вкладка уже создана
+
+			$scope.rooms[room].messages.push({
+				u: data.u,
+				t: data.t,
+				n: data.n,
+				d: data.d
+			});
+
+			$scope.$apply();
+			tools.toBottom(room);
+
+		} else {
+			// надо создать вкладку
+			hitagi.getMessages(data.u);
+		}
+
+
+	});
+
 
 
 	$scope.tabClick = function(tab){
@@ -104,11 +181,32 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 
 		if(!activeRoom) return;
 
-		hitagi.chat(text, activeRoom);
+		if($scope.rooms[activeRoom].type == 'room') {
+			hitagi.chat(text, activeRoom);
+		} else {
+
+			hitagi.sendMess($scope.rooms[activeRoom].user, text);
+
+		}
+
+
+
 
 	}
 	$scope.closeRoom = function(room){
-		hitagi.leaveRoom(room);
+
+
+		if($scope.rooms[activeRoom].type == 'room') {
+			hitagi.chat(text, activeRoom);
+		} else {
+			delete $scope.rooms[activeRoom];
+			$scope.$apply();
+
+			activeRoom = tools.getFirst($scope.rooms);
+			tools.selectRoom(activeRoom);
+
+		}
+
 	}
 
 	$scope.messageHtml = function(m) {
@@ -125,12 +223,19 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 	$scope.modal = {
 		title: 'Simple form',
 		content: $sce.trustAsHtml('some content block'),
-		visible: 1
+		visible: 0
 	}
 	$scope.modalClose = function(){
 		$scope.modal.visible = 0;
 	}
 
+
+
+
+
+	$scope.personalmessage = function(user) {
+		hitagi.getMessages(user);
+	}
 
 });
 

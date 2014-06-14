@@ -22,7 +22,13 @@
 <body ng-controller="MainCtrl">
 <div class="wrap">
 	<div class="header">
+		<div class="extra-links">
+			<a href="#" target="_blank" title="Наша группа в ВК"><img src="img/vk.png" /></a>
+		</div>
 
+
+
+		<input type="button" value="PM" ng-click="personalmessage('admin')" />
 
 	</div>
 	<div id="tabs">
