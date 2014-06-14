@@ -14,6 +14,8 @@
 
 	<script src="js/angular.min.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/directives.js"></script>
+	<script src="js/services.js"></script>
 	<script src="js/net.js"></script>
 
 </head>
@@ -21,7 +23,6 @@
 <div class="wrap">
 	<div class="header">
 
-		<input type="button" ng-click="addroom()" value="add room" />
 
 	</div>
 	<div id="tabs">
@@ -34,6 +35,9 @@
 				ng-class="{'active-tab':$first}">
 				{{room.caption}} <span></span>
 			</li>
+			<li class="new-room">
+				<img src="img/plus.png" alt="" title="Открыть новую комнату" ng-click="addroom()"/>
+ 			</li>
 		</ul>
 
 		<div class="tabs-content">

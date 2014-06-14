@@ -61,7 +61,8 @@
     bottom:0;
     top:32px;
     overflow-y: scroll;
-    background: url('../img/handmadepaper.png');
+    background: url('../backgrounds/fon3.jpg') no-repeat bottom right;
+    background-size: cover;
     font-size: 16px;
     padding-left: 4px;
 }
@@ -90,7 +91,7 @@
 	bottom:0;
 	z-index: 1000;
 	background: rgb(200, 238, 253) url('../img/start-background.jpg');
-	background-size: 100%; /* ����������� �������� */
+	background-size: 100%;
 }
 .screen-block{
 	width:600px;
@@ -182,4 +183,11 @@
 #tabs .tabs-content > div{
     display:none;
 }
-
+#tabs .tabs-inset li.new-room{
+    padding: 5px;
+    border: none;
+    background: transparent;
+}
+#tabs .tabs-inset li.new-room:hover{
+    background: transparent;
+}

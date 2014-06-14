@@ -3,7 +3,6 @@
  * User: Spirit
  * Date: 12.06.14
  * Time: 14:53
- * To change this template use File | Settings | File Templates.
  */
 
 app.service('net', function(){
