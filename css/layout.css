@@ -16,7 +16,7 @@
 	bottom:0px;
 	top:31px;
 	width:220px;
-	background: url('img/bg2.png');
+	background: url('../img/bg2.png');
     border-left: 1px solid blue;
     overflow-y: scroll;
 }
@@ -42,7 +42,6 @@
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
     margin: 5px;
 }
 
@@ -62,7 +61,7 @@
     bottom:0;
     top:32px;
     overflow-y: scroll;
-    background: url('img/handmadepaper.png');
+    background: url('../img/handmadepaper.png');
     font-size: 16px;
     padding-left: 4px;
 }
@@ -90,7 +89,7 @@
 	right:0;
 	bottom:0;
 	z-index: 1000;
-	background: rgb(200, 238, 253) url('img/start-background.jpg');
+	background: rgb(200, 238, 253) url('../img/start-background.jpg');
 	background-size: 100%; /* ����������� �������� */
 }
 .screen-block{
@@ -117,6 +116,9 @@
     margin-right: 50px;
 }
 
+.room-messages > div{
+    padding: 1px 2px;
+}
 .room-messages .m-date {
     font-size: 75%;
     font-style: italic;
@@ -126,7 +128,6 @@
     font-weight: bold;
     width: 120px;
     display: inline-block;
-    padding-left: 2px;
 }
 .room-messages .m-text {
 
@@ -137,3 +138,48 @@
 .red{
     color:red;
 }
+
+#tabs .tabs-inset{
+    list-style: none;
+    overflow:hidden;
+    margin: 0;
+    padding: 0;
+}
+#tabs .tabs-inset li{
+    float:left;
+    padding:5px 20px;
+    /*background: rgb(233, 233, 233);*/
+    margin-right: 3px;
+    border: 1px solid black;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    height: 32px;
+    overflow: hidden;
+    border-bottom: none;
+}
+#tabs .tabs-inset li:hover{
+    background: gray;
+    color: white;
+}
+#tabs .tabs-inset li.active-tab{
+    background: gray;
+    color: white;
+}
+#tabs .tabs-inset li span{
+    width:8px;
+    height:8px;
+    background-color: red;
+    display: inline-block;
+    margin-left: 10px;
+
+}
+#tabs .tabs-inset li span:hover{
+    background-color: black;
+}
+#tabs .tabs-content{
+
+}
+#tabs .tabs-content > div{
+    display:none;
+}
+

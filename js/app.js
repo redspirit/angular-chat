@@ -161,7 +161,6 @@ app.service('tools', function(){
 			return Math.round(new Date().valueOf() / 1000);
 		},
 		toBottom: function(room) {
-			console.log('scroll', room);
 			var pan = document.querySelector('#tabcont-' + room + ' .room-messages');
 			pan.scrollTop = pan.scrollHeight;
 		},

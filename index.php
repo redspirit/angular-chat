@@ -7,16 +7,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link rel="stylesheet" type="text/css" href="animate.css">
-	<link rel="stylesheet" type="text/css" href="tabs.css" />
-	<link rel="stylesheet" type="text/css" href="layout.css" />
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/layout.css" />
 
-	<script src="microevent.js"></script>
-	<script src="underscore-min.js"></script>
+	<script src="js/microevent.js"></script>
 
-	<script src="angular.min.js"></script>
-	<script src="app.js"></script>
-	<script src="net.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/net.js"></script>
 
 </head>
 <body ng-controller="MainCtrl">
