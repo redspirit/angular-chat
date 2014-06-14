@@ -18,17 +18,17 @@ app.service('net', function(){
 		var ways = {
 			vkauth: function(msg) {
 
-				console.log(msg);
 				self.trigger('auth');
 
 			},
 			joinroom: function(msg) {
-
-				msg.type = undefined;
-				msg.status = undefined;
-
-				self.trigger('joinroom', msg);
-
+				if (msg.status == 'ok'){
+					delete msg.type;
+					delete msg.status;
+					self.trigger('joinroom', msg);
+				} else {
+					console.log('ERROR:', msg.reason);
+				}
 			},
 			chat: function(msg) {
 
@@ -40,6 +40,9 @@ app.service('net', function(){
 			},
 			userleaved: function(msg) {
 				self.trigger('userleaved', msg);
+			},
+			leaveroom: function(msg) {
+				self.trigger('leaveroom', msg);
 			}
 		}
 
@@ -89,6 +92,15 @@ app.service('net', function(){
 				text: text,
 				cl:"e30ce3",
 				type:"chat"
+			});
+
+		}
+
+		this.leaveRoom = function(room){
+
+			self.send({
+				room: room,
+				type:'leaveroom'
 			});
 
 		}

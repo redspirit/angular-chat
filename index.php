@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="layout.css" />
 
 	<script src="microevent.js"></script>
+	<script src="underscore-min.js"></script>
 
 	<script src="angular.min.js"></script>
 	<script src="app.js"></script>
@@ -22,12 +23,17 @@
 <div class="wrap">
 	<div class="header">
 
+		<input type="button" ng-click="addroom()" value="add room" />
 
 	</div>
 	<div id="tabs">
 
 		<ul class="tabs-inset">
-			<li ng-repeat="room in rooms" id="tab-{{room.name}}" ng-click="tabClick(room.name)" ng-class="{'active-tab':$first}">
+			<li ng-repeat="room in rooms | toArray | orderBy:'index'"
+				id="tab-{{room.name}}"
+				ng-tabbutton="room.name"
+				ng-click="tabClick(room.name)"
+				ng-class="{'active-tab':$first}">
 				{{room.caption}} <span></span>
 			</li>
 		</ul>
@@ -37,7 +43,7 @@
 
 				<div class="room-messages">
 					<div ng-repeat="mess in room.messages">
-						<span class="m-date" title="{{dateFormat(mess.d)}}">{{timeFormat(mess.d)}}</span>
+						<span class="m-date" title="{{mess.d*1000 | date:'MMMM d, y hh:mm:ss'}}">{{mess.d*1000 | date:'hh:mm'}}</span>
 						<span class="m-nick">{{mess.n}}</span>
 						<span class="m-text" ng-bind-html="messageHtml(mess.t)" ng-class="mess.cls"></span>
 					</div>
