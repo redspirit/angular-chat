@@ -8,7 +8,7 @@
 
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
-	<link rel="stylesheet" type="text/css" href="css/layout.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 
 	<script src="js/microevent.js"></script>
 
@@ -52,7 +52,7 @@
 				</div>
 
 				<div class="roster">
-					<table ng-repeat="user in room.users" class="user">
+					<table ng-repeat="user in room.users | toArray | orderBy:'nick'" class="user">
 						<tr>
 							<td rowspan="2" scope="col" class="cc1">
 								<img class="profava" ng-src="{{user.avaurl}}" alt="" />
@@ -87,11 +87,19 @@
 	<div class="input">
 		<input type="text" class="message-field" ng-model="messageText" ng-enter>
 	</div>
-	<div class="tools">
-		tools
+	<div class="tools" ng-toolspanel>
+		<div ng-repeat="btn in toolsItems">
+			{{btn.name}}
+		</div>
 	</div>
-</div>	
+</div>
 
+<div id="overlay" ng-show="modal.visible" ng-click="modalClose()"></div>
+<div class="modal-form" ng-show="modal.visible">
+	<div class="close-form" ng-click="modalClose()"><img title="Закрыть" src="img/close-form.png" alt=""></div>
+	<h1>{{modal.title}}</h1>
+	<div ng-bind-html="modal.content"></div>
+</div>
 
 </body>
 </html>

@@ -29,3 +29,23 @@ app.directive('ngTabbutton', function() {
 
 	}
 });
+
+app.directive('ngToolspanel', function() {
+	return function($scope, elem, attrs) {
+
+		$scope.toolsItems = [
+			{name: 'one'},
+			{name: 'two'},
+			{name: 'three'}
+		];
+
+	}
+});
+
+app.directive('ngModal', function() {
+	return function($scope, elem, attrs) {
+
+
+
+	}
+});

@@ -118,6 +118,17 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 
 	$scope.addroom = function(){
 		hitagi.join('hentachik');
+		$scope.modal.visible = 1;
+	}
+
+
+	$scope.modal = {
+		title: 'Simple form',
+		content: $sce.trustAsHtml('some content block'),
+		visible: 1
+	}
+	$scope.modalClose = function(){
+		$scope.modal.visible = 0;
 	}
 
 
