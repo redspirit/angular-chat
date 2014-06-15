@@ -8,9 +8,13 @@
 
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
 	<script src="js/microevent.js"></script>
+	<script src="js/perfect-scrollbar.min.js"></script>
+	<script src="js/jquery.fancybox.pack.js"></script>
 
 	<script src="js/angular.min.js"></script>
 	<script src="js/app.js"></script>
@@ -22,10 +26,19 @@
 <body ng-controller="MainCtrl">
 <div class="wrap">
 	<div class="header">
+
+		<a href="#">
+			<img src="img/logo.png" class="logo" alt="main page" />
+		</a>
+
 		<div class="extra-links">
 			<a href="http://vk.com/hitagi_chat" target="_blank" class="link-vk" title="Наша группа в ВК"></a>
 		</div>
 
+		<div class="my-info">
+			<span class="my-nick" ng-click="editProfile()" title="Редакрировать мой профиль">{{me.nick}}</span>
+			<img class="ava" ng-click="setAvatar()" ng-src="{{me.avaurl}}" title="Сменить аватарку" alt="" />
+		</div>
 
 
 		<!--<input type="button" value="PM" ng-click="personalmessage('admin')" />-->
@@ -48,7 +61,7 @@
 		</ul>
 
 		<div class="tabs-content">
-			<div ng-repeat="room in rooms" id="tabcont-{{room.name}}">
+			<div ng-repeat="room in rooms" id="tabcont-{{room.name}}" ng-roomcontent>
 
 				<div class="room-messages">
 					<div ng-repeat="mess in room.messages">
@@ -105,7 +118,7 @@
 <div class="modal-form" ng-show="modal.visible">
 	<div class="close-form" ng-click="modalClose()"><img title="Закрыть" src="img/close-form.png" alt=""></div>
 	<h1>{{modal.title}}</h1>
-	<div ng-bind-html="modal.content"></div>
+	<div ng-bind-html="messageHtm(modal.content)"></div>
 </div>
 
 </body>

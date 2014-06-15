@@ -189,17 +189,10 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 		if($scope.rooms[activeRoom].type == 'room') {
 			hitagi.chat(text, activeRoom);
 		} else {
-
 			hitagi.sendMess($scope.rooms[activeRoom].user, text);
-
 		}
-
-
-
-
 	}
 	$scope.closeRoom = function(room){
-
 
 		if($scope.rooms[activeRoom].type == 'room') {
 			hitagi.leaveRoom(activeRoom);
@@ -226,8 +219,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 
 
 	$scope.modal = {
-		title: 'Simple form',
-		content: $sce.trustAsHtml('some content block'),
+		title: '',
+		content: '',
 		visible: 0
 	}
 	$scope.modalClose = function(){
@@ -238,9 +231,22 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 
 
 
-	$scope.personalmessage = function(user) {
-		hitagi.getMessages(user);
+
+	$scope.editProfile = function() {
+		$scope.modal.title = 'Редактирование профиля';
+		$scope.modal.content = '************';
+		$scope.modal.visible = 1;
 	}
+	$scope.setAvatar = function() {
+		$scope.modal.title = 'Установить аватарку';
+		$scope.modal.content = '************';
+		$scope.modal.visible = 1;
+	}
+
+
+
+	$('.fancy-pic').fancybox();
+
 
 });
 

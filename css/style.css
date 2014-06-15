@@ -21,7 +21,7 @@ body{
     top: 32px;
     width: 220px;
     background: url('../img/roster.jpg');
-    overflow-y: scroll;
+    overflow: hidden;
 }
 
 .roster .user {
@@ -42,9 +42,7 @@ body{
 .roster .profava {
     max-width: 80px;
     max-height: 80px;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
+    border-radius: 8px;
     margin: 5px;
 }
 
@@ -63,12 +61,12 @@ body{
     right:220px;
     bottom:0;
     top:32px;
-    overflow-y: scroll;
+    overflow: hidden;
     background: url('../backgrounds/fon5.jpg') no-repeat bottom right;
     background-size: cover;
     font-size: 16px;
     padding-left: 4px;
-    box-shadow: inset 0px 3px 10px 0px rgba(50, 50, 50, 0.68);
+    padding-bottom: 5px;
 }
 .input{
 	position:absolute;
@@ -136,6 +134,25 @@ body{
 }
 .room-messages .m-text {
 
+}
+.tabs-content:before{
+    content:'';
+    position: absolute;
+    height: 10px;
+    width: 100%;
+    margin-left: -220px;
+    z-index: 1;
+    background: url('../img/shadow.png');
+}
+.tabs-content:after{
+    content:'';
+    position: absolute;
+    bottom: -1px;
+    height: 10px;
+    width: 100%;
+    margin-left: -220px;
+    z-index: 1;
+    background: url('../img/shadow2.png');
 }
 
 #overlay{
@@ -243,8 +260,8 @@ body{
 
 .extra-links{
     position: absolute;
-    top: 5px;
-    right: 5px;
+    left: 9px;
+    top: 44px;
 }
 .link-vk{
     width: 32px;
@@ -255,3 +272,48 @@ body{
 .link-vk:hover{
     background-image: url('../img/vk_hover.png');
 }
+.logo{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+img.inline-pic{
+    max-width: 400px;
+    max-height: 400px;
+    margin: 3px 0;
+    box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+}
+img.smile{
+
+}
+.my-info{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}
+.my-info .ava{
+    border-radius: 50%;
+    cursor: pointer;
+}
+.my-info .my-nick{
+    font-size: 30px;
+    color: gray;
+    font-style: italic;
+    margin-right: 5px;
+    cursor: pointer;
+ }
+
+
+
+.ps-container .ps-scrollbar-x-rail{position:absolute;bottom:3px;height:8px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;opacity:0;filter:alpha(opacity=0);-o-transition:background-color .2s linear,opacity .2s linear;-webkit-transition:background-color.2s linear,opacity .2s linear;-moz-transition:background-color .2s linear,opacity .2s linear;transition:background-color .2s linear,opacity .2s linear}
+.ps-container:hover .ps-scrollbar-x-rail,.ps-container.hover .ps-scrollbar-x-rail{opacity:.6;filter:alpha(opacity=60)}
+.ps-container .ps-scrollbar-x-rail:hover,.ps-container .ps-scrollbar-x-rail.hover{background-color:#eee;opacity:.9;filter:alpha(opacity=90)}
+.ps-container .ps-scrollbar-x-rail.in-scrolling{opacity:.9;filter:alpha(opacity=90)}
+.ps-container .ps-scrollbar-y-rail{position:absolute;right:3px;width:8px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;opacity:0;filter:alpha(opacity=0);-o-transition:background-color .2s linear,opacity .2s linear;-webkit-transition:background-color.2s linear,opacity .2s linear;-moz-transition:background-color .2s linear,opacity .2s linear;transition:background-color .2s linear,opacity .2s linear}
+.ps-container:hover .ps-scrollbar-y-rail,.ps-container.hover .ps-scrollbar-y-rail{opacity:.6;filter:alpha(opacity=60)}
+.ps-container .ps-scrollbar-y-rail:hover,.ps-container .ps-scrollbar-y-rail.hover{background-color:#eee;opacity:.9;filter:alpha(opacity=90)}
+.ps-container .ps-scrollbar-y-rail.in-scrolling{opacity:.9;filter:alpha(opacity=90)}
+.ps-container .ps-scrollbar-x{position:absolute;bottom:0;height:8px;background-color:#aaa;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-o-transition:background-color .2s linear;-webkit-transition:background-color.2s linear;-moz-transition:background-color .2s linear;transition:background-color .2s linear}.ps-container.ie6 .ps-scrollbar-x{font-size:0}
+.ps-container .ps-scrollbar-x-rail:hover .ps-scrollbar-x,.ps-container .ps-scrollbar-x-rail.hover .ps-scrollbar-x{background-color:#999}
+.ps-container .ps-scrollbar-y{position:absolute;right:0;width:8px;background-color:#aaa;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-o-transition:background-color .2s linear;-webkit-transition:background-color.2s linear;-moz-transition:background-color .2s linear;transition:background-color .2s linear}
+.ps-container.ie .ps-scrollbar-y{font-size:0}.ps-container .ps-scrollbar-y-rail:hover .ps-scrollbar-y,.ps-container .ps-scrollbar-y-rail.hover .ps-scrollbar-y{background-color:#999}

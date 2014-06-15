@@ -42,6 +42,15 @@ app.directive('ngToolspanel', function() {
 	}
 });
 
+app.directive('ngRoomcontent', function() {
+	return function($scope, elem, attrs) {
+
+		elem.find('.roster').perfectScrollbar({'wheelSpeed':10, 'suppressScrollX':true});
+		elem.find('.room-messages').perfectScrollbar({'wheelSpeed':10, 'suppressScrollX':true});
+
+	}
+});
+
 app.directive('ngRoster', function() {
 	return function($scope, elem, attrs) {
 

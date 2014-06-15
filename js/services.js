@@ -5,22 +5,6 @@
  * Time: 13:58
  */
 
-var jq = function(query, one) {
-	var elem;
-	if (one) {
-		elem = angular.element(document.querySelector(query));
-	} else {
-		elem = angular.element(document.querySelectorAll(query));
-	}
-	elem.show = function() {
-		elem.css('display', 'block');
-	};
-	elem.hide = function() {
-		elem.css('display', 'none');
-	};
-	return elem;
-}
-
 app.filter("toArray", function() {
 	return function(obj) {
 		var result = [];
@@ -50,10 +34,10 @@ app.service('tools', function(){
 			return '';
 		},
 		selectRoom: function(room) {
-			jq('.tabs-inset > li').removeClass('active-tab');
-			jq('#tab-'+room, 1).addClass('active-tab');
-			jq('.tabs-content > div').hide();
-			jq('#tabcont-'+room, 1).show();
+			$('.tabs-inset > li').removeClass('active-tab');
+			$('#tab-'+room).addClass('active-tab');
+			$('.tabs-content > div').hide();
+			$('#tabcont-'+room).show();
 		}
 	}
 });
@@ -65,20 +49,20 @@ app.service('messageParser', function(){
 	var testStr = function (str, pat){
 		return new RegExp(pat, 'i').test(str);
 	}
-	
+
 	return {
 		parse: function(s) {
 
 			if(uplRegexp.test(s)){
 				s.replace(uplRegexp, function(a,b,c){
-					s = '<a target="_blank" href="' + b + '"><img class="inline-pic" src="' + c + '" alt="" /></a>';
+					s = '<a class="fancy-pic" rel="screen" target="_blank" href="' + b + '"><img class="inline-pic" src="' + c + '" alt="" /></a>';
 				});
 			} else {
 				s = s.replace(linkReg, function(link) {
 
 					if(/\.(jpg|jpeg|gif|png)\??.*$/i.test(link)){ // image
 
-						return '<a target="_blank" href="' + link + '"><img class="inline-pic" src="' + link + '" alt="" /></a>';
+						return '<a class="fancy-pic" rel="screen" target="_blank" href="' + link + '"><img class="inline-pic" src="' + link + '" alt="" /></a>';
 
 					} else if(testStr(link, 'htt(p|ps)://(www.)?youtube.com/')){ 	// youtube
 
@@ -99,7 +83,7 @@ app.service('messageParser', function(){
 
 			// смайлы
 			s = s.replace(/\*smile(\d+)\*/gm, function(a,b){
-				return '<img src="smiles/'+b+'.gif" alt="" />';
+				return '<img class="smile" src="smiles/'+b+'.gif" alt="" />';
 			});
 
 			return s;
