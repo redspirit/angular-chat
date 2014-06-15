@@ -1,6 +1,6 @@
 var app = angular.module('ChatApp', []);
 
-app.controller('MainCtrl', function($scope, $sce, net, tools){
+app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 
 	$scope.rooms = {};
 	$scope.me = {
@@ -15,7 +15,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 	var hitagi = new net.start('aniavatars.com:8080');
 
 	hitagi.bind('open', function(data){
-		//hitagi.auth();
+		hitagi.auth();
 	});
 
 	hitagi.bind('auth', function(data){
@@ -38,7 +38,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 
 		$scope.rooms[data.r].messages.push({
 			u: data.u,
-			t: data.t,
+			t: messageParser.parse(data.t),
 			n: nicks[data.u],
 			d: tools.timestamp()
 		});
@@ -54,6 +54,11 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 		$scope.rooms[data.name] = data;
 		$scope.rooms[data.name].index = roomsIndex;
 		$scope.rooms[data.name].type = 'room';
+
+		for (var j in data.messages) {
+			$scope.rooms[data.name].messages[j].t = messageParser.parse(data.messages[j].t);
+		}
+
 
 		$scope.$apply();
 		activeRoom = data.name;
@@ -122,7 +127,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 		$scope.rooms[roomName] = {
 			messages: data.messages,
 			index: roomsIndex,
-			caption: data.user.nick,
+			caption: '@' + data.user.nick,
 			name: roomName,
 			user: data.user.login,
 			type: 'pm',
@@ -197,15 +202,15 @@ app.controller('MainCtrl', function($scope, $sce, net, tools){
 
 
 		if($scope.rooms[activeRoom].type == 'room') {
-			hitagi.chat(text, activeRoom);
-		} else {
-			delete $scope.rooms[activeRoom];
-			$scope.$apply();
-
-			activeRoom = tools.getFirst($scope.rooms);
-			tools.selectRoom(activeRoom);
-
+			hitagi.leaveRoom(activeRoom);
 		}
+
+		delete $scope.rooms[activeRoom];
+		$scope.$apply();
+
+		activeRoom = tools.getFirst($scope.rooms);
+		tools.selectRoom(activeRoom);
+
 
 	}
 

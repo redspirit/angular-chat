@@ -23,12 +23,12 @@
 <div class="wrap">
 	<div class="header">
 		<div class="extra-links">
-			<a href="#" target="_blank" title="Наша группа в ВК"><img src="img/vk.png" /></a>
+			<a href="http://vk.com/hitagi_chat" target="_blank" class="link-vk" title="Наша группа в ВК"></a>
 		</div>
 
 
 
-		<input type="button" value="PM" ng-click="personalmessage('admin')" />
+		<!--<input type="button" value="PM" ng-click="personalmessage('admin')" />-->
 
 	</div>
 	<div id="tabs">
@@ -39,7 +39,8 @@
 				ng-tabbutton="room.name"
 				ng-click="tabClick(room.name)"
 				ng-class="{'active-tab':$first}">
-				{{room.caption}} <span></span>
+				<span>{{room.caption}}</span>
+				<img class="tab-close" src="img/tab-close.png" alt="" />
 			</li>
 			<li class="new-room">
 				<img src="img/plus.png" alt="" title="Открыть новую комнату" ng-click="addroom()"/>
@@ -57,15 +58,15 @@
 					</div>
 				</div>
 
-				<div class="roster">
+				<div class="roster" ng-roster>
 					<table ng-repeat="user in room.users | toArray | orderBy:'nick'" class="user">
 						<tr>
 							<td rowspan="2" scope="col" class="cc1">
 								<img class="profava" ng-src="{{user.avaurl}}" alt="" />
 							</td>
 							<td scope="col" style="padding-top:6px">
-								<img class="stateSign" src="img/pirat.png" alt="">
-								<div class="statetxt">Пират</div>
+								<img class="stateSign" ng-src="{{'img/states/'+getStateUrl(user.state)}}" alt="">
+								<div class="statetxt">{{getStateText(user.state)}}</div>
 							</td>
 						</tr>
 						<tr>
@@ -76,7 +77,7 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="cc3">
-								<div class="profnick" title="Юзер: 2770">{{user.nick}}</div>
+								<div class="profnick" title="{{user.login}}">{{user.nick}}</div>
 								<div class="ustatus">{{user.statustext}}</div>
 							</td>
 						</tr>
