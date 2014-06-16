@@ -33,6 +33,13 @@ app.service('tools', function(){
 			}
 			return '';
 		},
+		countObj: function(obj) {
+			var count = 0;
+			for (var i in obj) {
+				count++;
+			}
+			return count;
+		},
 		selectRoom: function(room) {
 			$('.tabs-inset > li').removeClass('active-tab');
 			$('#tab-'+room).addClass('active-tab');

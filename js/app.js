@@ -26,7 +26,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 			avaurl: data.url,
 			statustext: data.statustext,
 			commpriv: data.privilege,
-			textcolor: data.textcolor
+			textcolor: data.textcolor,
+			messcount: 1234
 		}
 		$scope.$apply();
 
@@ -188,6 +189,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 
 		if($scope.rooms[activeRoom].type == 'room') {
 			hitagi.chat(text, activeRoom);
+			$scope.me.messcount++;
 		} else {
 			hitagi.sendMess($scope.rooms[activeRoom].user, text);
 		}
@@ -213,7 +215,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 
 
 	$scope.addroom = function(){
-		hitagi.join('hentachik');
+		hitagi.join('gruppa_s_');
 		$scope.modal.visible = 1;
 	}
 
@@ -243,6 +245,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 		$scope.modal.visible = 1;
 	}
 
+	$scope.countObj = tools.countObj;
 
 
 	$('.fancy-pic').fancybox();

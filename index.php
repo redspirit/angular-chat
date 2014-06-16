@@ -36,6 +36,7 @@
 		</div>
 
 		<div class="my-info">
+			<div class="mess-count">Я отправил: {{me.messcount}}</div>
 			<span class="my-nick" ng-click="editProfile()" title="Редакрировать мой профиль">{{me.nick}}</span>
 			<img class="ava" ng-click="setAvatar()" ng-src="{{me.avaurl}}" title="Сменить аватарку" alt="" />
 		</div>
@@ -69,6 +70,10 @@
 						<span class="m-nick">{{mess.n}}</span>
 						<span class="m-text" ng-bind-html="messageHtml(mess.t)" ng-class="mess.cls"></span>
 					</div>
+				</div>
+
+				<div class="room-info">
+					Людей в комнате: <b>{{countObj(room.users)}}</b>
 				</div>
 
 				<div class="roster" ng-roster>
