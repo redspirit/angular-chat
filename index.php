@@ -122,8 +122,7 @@
 <div id="overlay" ng-show="modal.visible" ng-click="modalClose()"></div>
 <div class="modal-form" ng-show="modal.visible">
 	<div class="close-form" ng-click="modalClose()"><img title="Закрыть" src="img/close-form.png" alt=""></div>
-	<h1>{{modal.title}}</h1>
-	<div ng-bind-html="messageHtm(modal.content)"></div>
+	<div ng-include="modal.template"></div>
 </div>
 
 </body>

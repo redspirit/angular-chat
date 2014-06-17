@@ -221,8 +221,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 
 
 	$scope.modal = {
-		title: '',
-		content: '',
+        template: 'templates/blank.html',
 		visible: 0
 	}
 	$scope.modalClose = function(){
@@ -231,17 +230,12 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 
 
 
-
-
-
 	$scope.editProfile = function() {
-		$scope.modal.title = 'Редактирование профиля';
-		$scope.modal.content = '************';
+		$scope.modal.template = 'templates/edit_profile.html';
 		$scope.modal.visible = 1;
 	}
 	$scope.setAvatar = function() {
-		$scope.modal.title = 'Установить аватарку';
-		$scope.modal.content = '************';
+		$scope.modal.template = 'templates/set_avatar.html';
 		$scope.modal.visible = 1;
 	}
 
