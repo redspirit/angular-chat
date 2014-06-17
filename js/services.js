@@ -49,6 +49,61 @@ app.service('tools', function(){
 	}
 });
 
+
+app.service('sounds', function(){
+
+	var audio = new Audio();
+	var canPlayMp3 = !!audio.canPlayType && audio.canPlayType('audio/mp3') != "";
+	var canPlayOgg = !!audio.canPlayType && audio.canPlayType('audio/ogg; codecs="vorbis"') != "";
+	var map = {
+		's1':'sounds/alert_26',
+		's2':'sounds/alert_36',
+		'message':'sounds/alert_asterisk_13'
+	}
+
+	var ext;
+	var volume;
+
+	if(canPlayMp3) {
+		ext = 'mp3';
+	} else if (canPlayOgg) {
+		ext = 'ogg';
+	} else {
+		ext = '';
+	}
+
+	audio.volume = 0.5;
+	volume = 0.5;
+
+	this.check = function(){
+		return ext;
+	}
+
+	this.volume = function(val){
+		audio.volume = val;
+		volume = val;
+	}
+
+	this.mute = function(mode){
+		if(mode) {
+			audio.volume = 0;
+		} else {
+			audio.volume = volume;
+		}
+	}
+
+	this.play = function(name){
+		if(!ext) return false;
+		var file = map[name];
+		if(file) {
+			audio.src = file + '.' + ext;
+			audio.play();
+		}
+	}
+
+});
+
+
 app.service('messageParser', function(){
 
 	var uplRegexp = /^uploadimage\|([a-z0-9:.\/]+)\|([a-z0-9:.\/]+)$/i;

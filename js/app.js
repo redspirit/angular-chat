@@ -1,6 +1,6 @@
 var app = angular.module('ChatApp', []);
 
-app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
+app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sounds){
 
 	$scope.rooms = {};
 	$scope.me = {
@@ -44,6 +44,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 			d: tools.timestamp()
 		});
 		$scope.$apply();
+
+		sounds.play('message');
 
 		tools.toBottom(data.r);
 
@@ -244,6 +246,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser){
 
 	$('.fancy-pic').fancybox();
 
+	console.log( sounds.check() );
 
 });
 
