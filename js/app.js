@@ -15,7 +15,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	var hitagi = new net.start('aniavatars.com:8080');
 
 	hitagi.bind('open', function(data){
-		hitagi.auth();
+		//hitagi.auth();
 	});
 
 	hitagi.bind('auth', function(data){
@@ -233,11 +233,11 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 
 	$scope.editProfile = function() {
-		$scope.modal.template = 'templates/edit_profile.html';
+		$scope.modal.template = 'edit_profile.html';
 		$scope.modal.visible = 1;
 	}
 	$scope.setAvatar = function() {
-		$scope.modal.template = 'templates/set_avatar.html';
+		$scope.modal.template = 'set_avatar.html';
 		$scope.modal.visible = 1;
 	}
 
