@@ -62,7 +62,7 @@ app.service('sounds', function(){
 	}
 
 	var ext;
-	var volume;
+	var mute = false;
 
 	if(canPlayMp3) {
 		ext = 'mp3';
@@ -73,33 +73,40 @@ app.service('sounds', function(){
 	}
 
 	audio.volume = 0.5;
-	volume = 0.5;
 
 	this.check = function(){
 		return ext;
 	}
 
 	this.volume = function(val){
-		audio.volume = val;
-		volume = val;
+		audio.volume = val / 100;
 	}
 
 	this.mute = function(mode){
 		if(mode) {
-			audio.volume = 0;
+			mute = true;
 		} else {
-			audio.volume = volume;
+			mute = false;
 		}
 	}
 
-	this.play = function(name){
+	this.play = function(name, force){
 		if(!ext) return false;
+
+		if(mute && !force) return false;
+
 		var file = map[name];
 		if(file) {
 			audio.src = file + '.' + ext;
 			audio.play();
 		}
 	}
+
+});
+
+
+app.service('notificate', function(){
+
 
 });
 

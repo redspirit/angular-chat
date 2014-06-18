@@ -7,8 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
-	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css" >
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
 
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/microevent.js"></script>
