@@ -6,12 +6,11 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 
-	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/microevent.js"></script>
 	<script src="js/perfect-scrollbar.min.js"></script>
 	<script src="js/jquery.fancybox.pack.js"></script>
@@ -19,9 +18,9 @@
 	<script src="js/angular.min.js"></script>
 	<script src="locales/locale_ru.js"></script>
 	<script src="js/app.js"></script>
-	<script src="js/directives.js"></script>
-	<script src="js/services.js"></script>
-	<script src="js/net.js"></script>
+	<script src="js/ng-directives.js"></script>
+	<script src="js/ng-services.js"></script>
+	<script src="js/ng-net.js"></script>
 
 </head>
 <body ng-controller="MainCtrl">
