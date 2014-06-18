@@ -122,7 +122,7 @@
 <div id="overlay" ng-show="modal.visible" ng-click="modalClose()"></div>
 <div class="modal-form" ng-show="modal.visible">
 	<div class="close-form" ng-click="modalClose()"><img title="Закрыть" src="img/close-form.png" alt=""></div>
-	<div ng-include="modal.template"></div>
+	<div ng-include="'templates/'+modal.template"></div>
 </div>
 
 </body>
