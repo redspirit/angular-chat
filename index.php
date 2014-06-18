@@ -36,7 +36,7 @@
 		</div>
 
 		<div class="my-info">
-			<div class="mess-count">Я отправил: {{me.messcount}}</div>
+			<div class="mess-count" ng-show="me.messcount">Я отправил: {{me.messcount}}</div>
 			<span class="my-nick" ng-click="editProfile()" title="Редакрировать мой профиль">{{me.nick}}</span>
 			<img class="ava" ng-click="setAvatar()" ng-src="{{me.avaurl}}" title="Сменить аватарку" alt="" />
 		</div>
