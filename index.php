@@ -17,6 +17,7 @@
 	<script src="js/jquery.fancybox.pack.js"></script>
 
 	<script src="js/angular.min.js"></script>
+	<script src="locales/locale_ru.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/directives.js"></script>
 	<script src="js/services.js"></script>
