@@ -22,11 +22,12 @@ app.service('net', function(){
 		}
 		ws.onmessage = function(e) {
 			var msg = JSON.parse(e.data);
+			var tp = msg.type;
 
-            if(msg.status == 'ok') {
+            if(msg.status != 'error') {
                 delete msg.type;
                 delete msg.status;
-                self.trigger(msg.type, msg);
+                self.trigger(tp, msg);
             } else {
                 console.log('ERROR [' + msg.type + ']: ' + msg.reason);
             }

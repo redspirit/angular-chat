@@ -18,7 +18,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		hitagi.auth();
 	});
 
-	hitagi.bind('auth', function(data){
+	hitagi.bind('vkauth', function(data){
+
 		$scope.me = {
 			login: data.login,
 			nick: data.nickname,
@@ -45,7 +46,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		});
 		$scope.$apply();
 
-		sounds.play('message');
+		if(data.u != myLogin) sounds.play('message');
 
 		tools.toBottom(data.r);
 
@@ -178,6 +179,51 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	});
 
+	hitagi.bind('setstate', function(data){
+
+		var user;
+		for(var i in $scope.rooms) {
+			user = $scope.rooms[i].users[data.user];
+			if(user) {
+
+				user.state = data.val;
+
+				$scope.rooms[i].messages.push({
+					u: '',
+					t: '<b>' + nicks[data.user] + '</b> сменил статус на ' + data.val,
+					n: '',
+					d: tools.timestamp(),
+					cls: {blue: true}
+				});
+
+			}
+		}
+		$scope.$apply();
+
+	});
+	hitagi.bind('setstatus', function(data){
+
+		var user;
+		for(var i in $scope.rooms) {
+			user = $scope.rooms[i].users[data.user];
+			if(user) {
+				user.statustext = data.text;
+
+				$scope.rooms[i].messages.push({
+					u: '',
+					t: '<b>' + nicks[data.user] + '</b> сменил статусный текст на: ' + data.text,
+					n: '',
+					d: tools.timestamp(),
+					cls: {blue: true}
+				});
+
+			}
+		}
+
+		$scope.$apply();
+
+	});
+
 
 
 	$scope.tabClick = function(tab){
@@ -223,7 +269,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 
 	$scope.modal = {
-        template: 'templates/blank.html',
+        template: 'blank.html',
 		visible: 0
 	}
 	$scope.modalClose = function(){

@@ -174,10 +174,13 @@ body{
 
 
 .green{
-    color: green;
+    color: #388043;
 }
 .red{
-    color:red;
+    color: #ff4573;
+}
+.blue{
+    color:#00008b;
 }
 
 .tools > div {
