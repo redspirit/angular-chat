@@ -15,7 +15,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	var hitagi = new net.start('aniavatars.com:8080');
 
 	hitagi.bind('open', function(data){
-		//hitagi.auth();
+		hitagi.auth();
 	});
 
 	hitagi.bind('auth', function(data){
