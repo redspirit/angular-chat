@@ -14,50 +14,6 @@ app.service('net', function(){
 		ws = new WebSocket('ws://' + server);
 
 
-		var ways = {
-			vkauth: function(msg) {
-
-				self.trigger('auth', msg);
-
-			},
-			joinroom: function(msg) {
-				if (msg.status == 'ok'){
-					delete msg.type;
-					delete msg.status;
-					self.trigger('joinRoom', msg);
-				} else {
-					console.log('ERROR:', msg.reason);
-				}
-			},
-			chat: function(msg) {
-
-				self.trigger('chat', msg);
-
-			},
-			userjoined: function(msg) {
-				self.trigger('userJoined', msg);
-			},
-			userleaved: function(msg) {
-				self.trigger('userLeaved', msg);
-			},
-			leaveroom: function(msg) {
-				self.trigger('leaveRoom', msg);
-			},
-			getmessages: function(msg) {
-				if (msg.status == 'ok'){
-					delete msg.type;
-					delete msg.status;
-					self.trigger('getMessages', msg);
-				} else {
-					console.log('ERROR:', msg.reason);
-				}
-			},
-			recmes: function(msg) {
-				self.trigger('newMess', msg.message);
-			}
-		}
-
-
 		ws.onopen = function() {
 			self.trigger('open');
 		}
@@ -66,7 +22,15 @@ app.service('net', function(){
 		}
 		ws.onmessage = function(e) {
 			var msg = JSON.parse(e.data);
-			if(typeof(ways[msg.type])=='function') ways[msg.type](msg);
+
+            if(msg.status == 'ok') {
+                delete msg.type;
+                delete msg.status;
+                self.trigger(msg.type, msg);
+            } else {
+                console.log('ERROR [' + msg.type + ']: ' + msg.reason);
+            }
+
 		}
 
 		this.send = function(data) {
@@ -117,6 +81,35 @@ app.service('net', function(){
 				type:'getmessages'
 			});
 		}
+
+        this.setState = function(state){
+            self.send({
+                val: state,
+                type:'setstate'
+            });
+        }
+        this.setStatus = function(status){
+            self.send({
+                text: status,
+                type:'setstatus'
+            });
+        }
+        this.setTopic = function(room, topic){
+            self.send({
+                room: room,
+                topic: topic,
+                type:'settopic'
+            });
+        }
+        this.setAvatar = function(user){
+            self.send({
+
+
+                type:'setavatar'
+            });
+        }
+
+
 
 	}
 

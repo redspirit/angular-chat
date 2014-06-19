@@ -51,7 +51,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	});
 
-	hitagi.bind('joinRoom', function(data){
+	hitagi.bind('joinroom', function(data){
 
 		roomsIndex++;
 		$scope.rooms[data.name] = data;
@@ -75,7 +75,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	});
 
-	hitagi.bind('userJoined', function(data){
+	hitagi.bind('userjoined', function(data){
 
 		$scope.rooms[data.room].users[data.name] = data.data;
 		nicks[data.name] = data.data.nick;
@@ -93,7 +93,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	});
 
-	hitagi.bind('userLeaved', function(data){
+	hitagi.bind('userleaved', function(data){
 
 		delete $scope.rooms[data.room].users[data.name];
 
@@ -110,7 +110,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	});
 
-	hitagi.bind('leaveRoom', function(data){
+	hitagi.bind('leaveroom', function(data){
 		delete $scope.rooms[data.room];
 		$scope.$apply();
 
@@ -118,7 +118,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		tools.selectRoom(activeRoom);
 	});
 
-	hitagi.bind('getMessages', function(data){
+	hitagi.bind('getmessages', function(data){
 
 		var roomName = 'pm-' + data.user.login;
 		var users = {};
@@ -146,7 +146,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	});
 
-	hitagi.bind('newMess', function(data){
+	hitagi.bind('recmess', function(data){
 
 		var room;
 
