@@ -37,8 +37,8 @@
 
 		<div class="my-info">
 			<div class="mess-count" ng-show="me.messcount">Я отправил: {{me.messcount}}</div>
-			<span class="my-nick" ng-click="editProfile()" title="Редакрировать мой профиль">{{me.nick}}</span>
-			<img class="ava" ng-click="setAvatar()" ng-src="{{me.avaurl}}" title="Сменить аватарку" alt="" />
+			<span class="my-nick" ng-click="showModal('edit_profile')" title="Редакрировать мой профиль">{{me.nick}}</span>
+			<img class="ava" ng-click="showModal('set_avatar')" ng-src="{{me.avaurl}}" title="Сменить аватарку" alt="" />
 		</div>
 
 
@@ -119,10 +119,15 @@
 	</div>
 </div>
 
-<div id="overlay" ng-show="modal.visible" ng-click="modalClose()"></div>
-<div class="modal-form" ng-show="modal.visible">
-	<div class="close-form" ng-click="modalClose()"><img title="Закрыть" src="img/close-form.png" alt=""></div>
-	<div ng-include="'templates/'+modal.template"></div>
+
+
+<div id="overlay" ng-click="hideModal()"></div>
+
+<div class="modal-form md-effect-16" modal-window>
+    <div class="md-content">
+	    <div class="close-form" ng-click="hideModal()"><img title="Закрыть" src="img/close-form.png" alt=""></div>
+	    <div ng-include="modalTemplate"></div>
+    </div>
 </div>
 
 </body>

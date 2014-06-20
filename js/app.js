@@ -259,31 +259,11 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	}
 
 
-	$scope.modal = {
-        template: 'blank.html',
-		visible: 0
-	}
-	$scope.modalClose = function(){
-		$scope.modal.visible = 0;
-	}
-
-
-
-	$scope.editProfile = function() {
-		$scope.modal.template = 'edit_profile.html';
-		$scope.modal.visible = 1;
-	}
-	$scope.setAvatar = function() {
-		$scope.modal.template = 'set_avatar.html';
-		$scope.modal.visible = 1;
-	}
 
 	$scope.countObj = tools.countObj;
 
 
 	$('.fancy-pic').fancybox();
-
-	console.log( sounds.check() );
 
 });
 

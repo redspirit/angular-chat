@@ -104,10 +104,40 @@ app.directive('autoscrollDown', function () {
                     return element.children().length;
                 },
                 function () {
-                    element.animate({ scrollTop: element.prop('scrollHeight')}, 600);
+
+                    // todo сделать это!
+                    //if(element.prop('offsetHeight') + element.prop('scrollTop') >= element.prop('scrollHeight')) {
+                        element.animate({ scrollTop: element.prop('scrollHeight')}, 600);
+                    //}
+
                 }
             );
         }
+    }
+});
+
+app.directive('modalWindow', function () {
+    return function($scope, elem) {
+
+        $scope.modalTemplate = 'templates/blank.html';
+
+
+        $scope.showModal = function(tmp){
+            $scope.modalTemplate = 'templates/' + tmp + '.html';
+
+            elem.addClass('md-show');
+            $('.overlay').css('visibility','visible');
+
+        }
+
+        $scope.hideModal = function(){
+            elem.addClass('md-show');
+            $('.overlay').css('visibility','visible');
+        }
+
+
+
+
     }
 });
 
