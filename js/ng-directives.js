@@ -119,21 +119,48 @@ app.directive('autoscrollDown', function () {
 app.directive('modalWindow', function () {
     return function($scope, elem) {
 
+		var loadFlag = 0;
+		var overlay = $('.overlay');
+		var oldTpl = '';
         $scope.modalTemplate = 'templates/blank.html';
 
+		$scope.modalLoad = function(){
 
-        $scope.showModal = function(tmp){
-            $scope.modalTemplate = 'templates/' + tmp + '.html';
+			if(loadFlag) {
 
-            elem.addClass('md-show');
-            $('.overlay').css('visibility','visible');
+				setTimeout(function() {
+					elem.addClass('md-show');
+					overlay.addClass('md-show');
+				}, 50);
+
+			}
+
+		}
+
+        $scope.showModal = function(tpl){
+			loadFlag = 1;
+			var newTpl = 'templates/' + tpl + '.html';
+			if(oldTpl == newTpl) {
+				elem.addClass('md-show');
+				overlay.addClass('md-show');
+			} else {
+				$scope.modalTemplate = newTpl;
+				oldTpl = newTpl;
+			}
 
         }
 
         $scope.hideModal = function(){
-            elem.addClass('md-show');
-            $('.overlay').css('visibility','visible');
-        }
+			loadFlag = 0;
+
+			elem.removeClass('md-show');
+			overlay.removeClass('md-show');
+
+			//setTimeout(function() {
+			//	$scope.modalTemplate = 'templates/blank.html';
+			//}, 500);
+
+		}
 
 
 

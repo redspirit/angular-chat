@@ -121,13 +121,9 @@
 
 
 
-<div id="overlay" ng-click="hideModal()"></div>
-
-<div class="modal-form md-effect-16" modal-window>
-    <div class="md-content">
-	    <div class="close-form" ng-click="hideModal()"><img title="Закрыть" src="img/close-form.png" alt=""></div>
-	    <div ng-include="modalTemplate"></div>
-    </div>
+<!-- <div class="overlay" ng-click="hideModal()"></div> -->
+<div class="md-modal md-effect-7" modal-window>
+	<div class="md-content" ng-include="modalTemplate" onload="modalLoad()"></div>
 </div>
 
 </body>
