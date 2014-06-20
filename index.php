@@ -50,7 +50,7 @@
 		<ul class="tabs-inset">
 			<li ng-repeat="room in rooms | toArray | orderBy:'index'"
 				id="tab-{{room.name}}"
-				ng-tabbutton="room.name"
+				tab-button="room.name"
 				ng-click="tabClick(room.name)"
 				ng-class="{'active-tab':$first}">
 				<span>{{room.caption}}</span>
@@ -62,9 +62,9 @@
 		</ul>
 
 		<div class="tabs-content">
-			<div ng-repeat="room in rooms" id="tabcont-{{room.name}}" ng-roomcontent>
+			<div ng-repeat="room in rooms" id="tabcont-{{room.name}}" room-content>
 
-				<div class="room-messages">
+				<div class="room-messages" autoscroll-down>
 					<div ng-repeat="mess in room.messages">
 						<span class="m-date" title="{{mess.d*1000 | date:'MMMM d, y hh:mm:ss'}}">{{mess.d*1000 | date:'hh:mm'}}</span>
 						<span class="m-nick">{{mess.n}}</span>
@@ -112,7 +112,7 @@
 	<div class="input">
 		<input type="text" class="message-field" ng-model="messageText" ng-enter>
 	</div>
-	<div class="tools" ng-toolspanel>
+	<div class="tools" tool-spanel>
 		<div ng-repeat="btn in toolsItems">
 			{{btn.name}}
 		</div>

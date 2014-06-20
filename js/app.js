@@ -32,7 +32,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		}
 		$scope.$apply();
 
-		hitagi.join('public');
+		hitagi.join('gruppa_s_');
 	});
 
 
@@ -47,8 +47,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.$apply();
 
 		if(data.u != myLogin) sounds.play('message');
-
-		tools.toBottom(data.r);
 
 	});
 
@@ -72,7 +70,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		}
 
 		tools.selectRoom(activeRoom);
-		tools.toBottom(activeRoom);
 
 	});
 
@@ -90,7 +87,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		});
 
 		$scope.$apply();
-		tools.toBottom(data.room);
 
 	});
 
@@ -107,7 +103,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		});
 
 		$scope.$apply();
-		tools.toBottom(data.room);
 
 	});
 
@@ -143,7 +138,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		nicks[data.user.login] = data.user.nick;
 
 		tools.selectRoom(activeRoom);
-		tools.toBottom(activeRoom);
 
 	});
 
@@ -169,7 +163,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			});
 
 			$scope.$apply();
-			tools.toBottom(room);
 
 		} else {
 			// надо создать вкладку
@@ -229,7 +222,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	$scope.tabClick = function(tab){
 		activeRoom = tab;
 		tools.selectRoom(tab);
-		tools.toBottom(tab);
 	}
 	$scope.enterText = function(text){
 
@@ -263,8 +255,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 
 	$scope.addroom = function(){
-		hitagi.join('gruppa_s_');
-		$scope.modal.visible = 1;
+		hitagi.join('public');
 	}
 
 

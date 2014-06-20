@@ -16,16 +16,9 @@ app.filter("toArray", function() {
 });
 
 app.service('tools', function(){
-	var addZero = function(n){
-		return n < 10 ? '0' + n.toString() : n.toString();
-	}
 	return {
 		timestamp: function() {
 			return Math.round(new Date().valueOf() / 1000);
-		},
-		toBottom: function(room) {
-			var pan = document.querySelector('#tabcont-' + room + ' .room-messages');
-			pan.scrollTop = pan.scrollHeight;
 		},
 		getFirst: function(obj) {
 			for (var i in obj) {

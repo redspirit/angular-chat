@@ -19,7 +19,7 @@ app.directive('ngEnter', function() {
 	}
 });
 
-app.directive('ngTabbutton', function() {
+app.directive('tabButton', function() {
 	return function($scope, elem, attrs) {
 
 		elem.find('img').on('click', function() {
@@ -30,7 +30,7 @@ app.directive('ngTabbutton', function() {
 	}
 });
 
-app.directive('ngToolspanel', function() {
+app.directive('toolsPanel', function() {
 	return function($scope, elem, attrs) {
 
 		$scope.toolsItems = [
@@ -42,7 +42,7 @@ app.directive('ngToolspanel', function() {
 	}
 });
 
-app.directive('ngRoomcontent', function() {
+app.directive('roomContent', function() {
 	return function($scope, elem, attrs) {
 
 		elem.find('.roster').perfectScrollbar({'wheelSpeed':10, 'suppressScrollX':true});
@@ -95,7 +95,23 @@ app.directive('ngRoster', function() {
 	}
 });
 
-app.directive('ngSmileblock', function() {
+
+app.directive('autoscrollDown', function () {
+    return {
+        link: function postLink($scope, element) {
+            $scope.$watch(
+                function () {
+                    return element.children().length;
+                },
+                function () {
+                    element.animate({ scrollTop: element.prop('scrollHeight')}, 600);
+                }
+            );
+        }
+    }
+});
+
+app.directive('smileBlock', function() {
 
 	var smiles = {
 		1: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,
