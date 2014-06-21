@@ -7,6 +7,8 @@
 
 app.directive('ngEnter', function() {
 	return function($scope, element, attrs) {
+		$scope.messageText = '';
+
 		element.bind("keydown keypress", function(event) {
 			if(event.which === 13 && $scope.messageText) {
 				$scope.enterText($scope.messageText);
@@ -16,6 +18,16 @@ app.directive('ngEnter', function() {
 				event.preventDefault();
 			}
 		});
+
+		$('.tabs-content').on('click', '.m-nick', function(){
+			var text = ' ' + $(this).html() + ': ';
+
+			$scope.messageText = $scope.messageText + text;
+			$scope.$apply();
+			element.focus();
+
+		});
+
 	}
 });
 
@@ -44,9 +56,49 @@ app.directive('toolsPanel', function() {
 
 app.directive('roomContent', function() {
 	return function($scope, elem, attrs) {
-
 		elem.find('.roster').perfectScrollbar({'wheelSpeed':10, 'suppressScrollX':true});
 		elem.find('.room-messages').perfectScrollbar({'wheelSpeed':10, 'suppressScrollX':true});
+	}
+});
+
+app.directive('roster', function() {
+	return function($scope, elem) {
+
+
+		$scope.clickOnUserAva = function(user){
+			var top = elem.find('.profava[user='+user+']').offset().top;
+			$scope.requestUserProfile(user, top);
+		}
+
+	}
+});
+
+
+app.directive('posModal', function() {
+	return function($scope, elem) {
+
+		$scope.posmodal = {
+			title: '',
+			content: '',
+			state: 0
+		}
+
+
+		$scope.posModalShow = function(top) {
+			if($scope.posmodal.state) {
+				$scope.posmodal.state = 0;
+				elem.removeClass('md-show');
+			} else {
+				$scope.posmodal.state = 1;
+				elem.css('top', top + 'px');
+				elem.addClass('md-show');
+			}
+		}
+		$scope.posModalHide = function() {
+			$scope.posmodal.state = 0;
+			elem.removeClass('md-show');
+		}
+
 
 	}
 });

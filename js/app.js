@@ -3,7 +3,7 @@ var chatName = 'Hitagi Chat 3';
 
 app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sounds){
 
-
+	var currentPosModal = 0;
 	$scope.rooms = {};
 	$scope.me = {
 		login: 'u172144439'
@@ -225,7 +225,24 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.$apply();
 
 	});
+	hitagi.bind('getprofile', function(data){
 
+		var prof = data.userdata;
+		var profArr = [];
+		if(prof.gender == 1) prof.gender = 'Мальчик';
+		if(prof.gender == 2) prof.gender = 'Девочка';
+
+		for (var i in prof) {
+			if(prof[i]) profArr.push(prof[i]);
+		}
+
+		$scope.posmodal.title = prof.nickname;
+		$scope.posmodal.content = profArr.join('<br />');
+		$scope.$apply();
+
+		$scope.posModalShow(currentPosModal);
+
+	});
 
 
 
@@ -284,8 +301,15 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	$scope.testAction = function(){
 
 
-
 	}
+
+	$scope.requestUserProfile = function(user, top) {
+		if($scope.posmodal.state) return;
+		currentPosModal = top;
+		hitagi.getProfile(user);
+	}
+
+
 
 	$('.fancy-pic').fancybox();
 

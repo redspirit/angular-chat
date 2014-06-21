@@ -72,7 +72,7 @@
 
 				<div class="room-messages" autoscroll-down>
 					<div ng-repeat="mess in room.messages">
-						<span class="m-date" title="{{mess.d*1000 | date:'MMMM d, y hh:mm:ss'}}">{{mess.d*1000 | date:'hh:mm'}}</span>
+						<span class="m-date" title="{{mess.d*1000 | date:'d MMMM, hh:mm:ss'}}">{{mess.d*1000 | date:'hh:mm'}}</span>
 						<span class="m-nick">{{mess.n}}</span>
 						<span class="m-text" ng-bind-html="messageHtml(mess.t)" ng-class="mess.cls"></span>
 					</div>
@@ -82,11 +82,11 @@
 					Людей в комнате: <b>{{tools.countObj(room.users)}}</b>
 				</div>
 
-				<div class="roster">
+				<div class="roster" roster>
 					<table ng-repeat="user in room.users | toArray | orderBy:'nick'" class="user">
 						<tr>
 							<td rowspan="2" scope="col" class="cc1">
-								<img class="profava" ng-src="{{user.avaurl}}" alt="" />
+								<img class="profava" ng-src="{{user.avaurl}}" ng-click="clickOnUserAva(user.login)" user="{{user.login}}" alt="" />
 							</td>
 							<td scope="col" style="padding-top:6px">
 								<img class="stateSign" ng-src="{{tools.getStateUrl(user.state)}}" alt="">
@@ -96,12 +96,11 @@
 						<tr>
 							<td class="cc2">
 								<img class="upriv" title="Пользователь" src="img/user.png" alt="">
-								<div class="usmenu" priv="4"></div>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2" class="cc3">
-								<div class="profnick" title="{{user.login}}">{{user.nick}}</div>
+								<div class="profnick">{{user.nick}}</div>
 								<div class="ustatus">{{user.statustext}}</div>
 							</td>
 						</tr>
@@ -131,6 +130,17 @@
 <div class="md-modal md-effect-1" modal-window>
 	<div class="md-content" ng-include="modalTemplate" onload="modalLoad()"></div>
 </div>
+
+<div class="pos-modal pos-effect" pos-modal>
+	<div class="pos-content">
+		<h3>{{posmodal.title}}</h3>
+		<div ng-bind-html="messageHtml(posmodal.content)"></div>
+		<p>
+			<a href="#" ng-click="posModalHide()">close it</a>
+		</p>
+	</div>
+</div>
+
 
 </body>
 </html>

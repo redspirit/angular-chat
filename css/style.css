@@ -51,6 +51,10 @@ body{
     max-height: 80px;
     border-radius: 8px;
     margin: 5px;
+    cursor: pointer;
+}
+.roster .profava:hover {
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
 .roster .profnick {
@@ -59,6 +63,9 @@ body{
     margin-top: -5px;
     font-size: 13px;
     margin-bottom: 2px;
+}
+.roster .profnick:hover {
+    color: rgb(228, 0, 100);
 }
 .room-info{
     position: absolute;
@@ -154,12 +161,15 @@ input.message-field:focus{
     font-weight: bold;
     width: 120px;
     display: inline-block;
+    cursor: pointer;
+}
+.room-messages .m-nick:hover {
+    color: rgb(228, 0, 100);
 }
 .room-messages .m-text {
 
 }
 .tabs-content:after{
-    /*background-color: rgb(235, 253, 212);*/
     content: "";
     position: absolute;
     top: 30px;

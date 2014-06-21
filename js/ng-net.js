@@ -109,7 +109,12 @@ app.service('net', function(){
                 type:'setavatar'
             });
         }
-
+		this.getProfile = function(user){
+			self.send({
+				user: user,
+				type:'getprofile'
+			});
+		}
 
 
 	}

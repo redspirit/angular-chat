@@ -1,3 +1,65 @@
+.pos-modal {
+    visibility: hidden;
+    position: absolute;
+    right: 220px;
+    top: 200px;
+    width: 250px;
+    z-index: 8;
+}
+
+.pos-content{
+    background: #cee5b1;
+    text-align: center;
+    padding: 5px;
+    /* border: 1px solid rgb(95, 247, 192); */
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.75);
+}
+.pos-content:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    top: 0;
+    right: 0;
+    height: 0;
+    border-left: 15px solid #b9cd9f;
+    border-right: 15px solid transparent;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    margin-right: -30px;
+    margin-top: 8px;
+}
+
+.pos-content h3{
+    opacity: 0.8;
+    background: rgba(0, 0, 0, 0.13);
+    padding: 8px;
+    margin: -5px;
+    margin-bottom: 10px;
+}
+
+.pos-effect .pos-content {
+    -webkit-transform: translateX(20%);
+    -moz-transform: translateX(20%);
+    -ms-transform: translateX(20%);
+    transform: translateX(20%);
+    opacity: 0;
+    -webkit-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -moz-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+}
+
+.md-show.pos-effect .pos-content {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+}
+
+
+
+
 .overlay{
     position: fixed;
     visibility: hidden;
