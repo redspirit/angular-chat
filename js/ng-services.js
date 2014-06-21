@@ -17,6 +17,8 @@ app.filter("toArray", function() {
 
 app.service('tools', function(){
 
+	var titleElem = $('title');
+
 	var states = [];
 	var statesT = [];
 
@@ -85,10 +87,24 @@ app.service('tools', function(){
 			return count;
 		},
 		selectRoom: function(room) {
+			var element = $('#tabcont-' + room + ' .room-messages');
 			$('.tabs-inset > li').removeClass('active-tab');
 			$('#tab-'+room).addClass('active-tab');
 			$('.tabs-content > div').hide();
 			$('#tabcont-'+room).show();
+			element.animate({ scrollTop: element.prop('scrollHeight')}, 1000);
+			titleElem.html(chatName);
+		},
+		checkUnreads: function(rooms) {
+			var count = 0;
+			for(var i in rooms) {
+				count += rooms[i].unread;
+			}
+			if(count > 0) {
+				titleElem.html('[' + count + '] ' + chatName);
+			} else {
+				titleElem.html(chatName);
+			}
 		}
 	}
 });

@@ -2,7 +2,7 @@
 <html ng-app="ChatApp">
 <head>
 	<meta charset="utf-8" />
-	<title>Angular chat</title>
+	<title>Hitagi Chat 3</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -59,6 +59,7 @@
 				ng-click="tabClick(room.name)"
 				ng-class="{'active-tab':$first}">
 				<span>{{room.caption}}</span>
+				<p ng-show="room.unread" >{{room.unread}}</p>
 				<img class="tab-close" src="img/tab-close.png" alt="" />
 			</li>
 			<li class="new-room">

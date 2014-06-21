@@ -1,6 +1,8 @@
 var app = angular.module('ChatApp', []);
+var chatName = 'Hitagi Chat 3';
 
 app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sounds){
+
 
 	$scope.rooms = {};
 	$scope.me = {
@@ -45,6 +47,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			n: nicks[data.u],
 			d: tools.timestamp()
 		});
+		if(data.r != activeRoom) $scope.rooms[data.r].unread++;
+		tools.checkUnreads($scope.rooms);
 		$scope.$apply();
 
 		if(data.u != myLogin) sounds.play('message');
@@ -57,7 +61,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.rooms[data.name] = data;
 		$scope.rooms[data.name].index = roomsIndex;
 		$scope.rooms[data.name].type = 'room';
-		$scope.rooms[data.name].nmFlag = 0;
+		$scope.rooms[data.name].unread = 0;
 
 		for (var j in data.messages) {
 			$scope.rooms[data.name].messages[j].t = messageParser.parse(data.messages[j].t);
@@ -132,7 +136,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			name: roomName,
 			user: data.user.login,
 			type: 'pm',
-			users: users
+			users: users,
+			unread: 0
 		}
 		$scope.$apply();
 		activeRoom = roomName;
@@ -143,9 +148,10 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	});
 
-	hitagi.bind('recmess', function(data){
+	hitagi.bind('recmes', function(msg){
 
 		var room;
+		var data = msg.message;
 
 		if(data.u == myLogin) {
 			room = 'pm-' + data.r;
@@ -163,7 +169,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 				n: data.n,
 				d: data.d
 			});
-
+			if(room != activeRoom) $scope.rooms[room].unread++;
+			tools.checkUnreads($scope.rooms);
 			$scope.$apply();
 
 		} else {
@@ -225,6 +232,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	$scope.tabClick = function(tab){
 		activeRoom = tab;
+		$scope.rooms[tab].unread = 0;
 		tools.selectRoom(tab);
 	}
 	$scope.enterText = function(text){
@@ -271,6 +279,12 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		few: '{} сообщения',
 		many: '{} сообщений',
 		other: '{} сообщений'
+	}
+
+	$scope.testAction = function(){
+
+
+
 	}
 
 	$('.fancy-pic').fancybox();
