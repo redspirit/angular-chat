@@ -105,9 +105,10 @@ app.directive('autoscrollDown', function () {
                 },
                 function () {
 
-                    // todo сделать это!
+
+
                     //if(element.prop('offsetHeight') + element.prop('scrollTop') >= element.prop('scrollHeight')) {
-                        element.animate({ scrollTop: element.prop('scrollHeight')}, 600);
+                        element.animate({ scrollTop: element.prop('scrollHeight')}, 1000);
                     //}
 
                 }
@@ -127,17 +128,16 @@ app.directive('modalWindow', function () {
 		$scope.modalLoad = function(){
 
 			if(loadFlag) {
-
 				setTimeout(function() {
 					elem.addClass('md-show');
 					overlay.addClass('md-show');
 				}, 50);
-
 			}
 
 		}
 
         $scope.showModal = function(tpl){
+			if(loadFlag) return;
 			loadFlag = 1;
 			var newTpl = 'templates/' + tpl + '.html';
 			if(oldTpl == newTpl) {
@@ -147,23 +147,13 @@ app.directive('modalWindow', function () {
 				$scope.modalTemplate = newTpl;
 				oldTpl = newTpl;
 			}
-
         }
 
         $scope.hideModal = function(){
 			loadFlag = 0;
-
 			elem.removeClass('md-show');
 			overlay.removeClass('md-show');
-
-			//setTimeout(function() {
-			//	$scope.modalTemplate = 'templates/blank.html';
-			//}, 500);
-
 		}
-
-
-
 
     }
 });

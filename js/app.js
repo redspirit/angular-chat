@@ -259,9 +259,15 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	}
 
 
-
 	$scope.countObj = tools.countObj;
 
+	$scope.messagesForms = {
+		0: 'Нет сообщений',
+		one: '{} сообщение',
+		few: '{} сообщения',
+		many: '{} сообщений',
+		other: '{} сообщений'
+	}
 
 	$('.fancy-pic').fancybox();
 

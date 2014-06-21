@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
 	<link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css" >
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/modals.css" type="text/css" />
+	<link rel="stylesheet" href="css/scrollbars.css" type="text/css" />
 
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/microevent.js"></script>
@@ -18,8 +20,8 @@
 	<script src="js/angular.min.js"></script>
 	<script src="locales/locale_ru.js"></script>
 	<script src="js/app.js"></script>
-	<script src="js/ng-directives.js"></script>
 	<script src="js/ng-services.js"></script>
+	<script src="js/ng-directives.js"></script>
 	<script src="js/ng-net.js"></script>
 
 </head>
@@ -36,7 +38,7 @@
 		</div>
 
 		<div class="my-info">
-			<div class="mess-count" ng-show="me.messcount">Я отправил: {{me.messcount}}</div>
+			<div class="mess-count" ng-show="me.messcount"><ng-pluralize count="me.messcount" when="messagesForms"></ng-pluralize></div>
 			<span class="my-nick" ng-click="showModal('edit_profile')" title="Редакрировать мой профиль">{{me.nick}}</span>
 			<img class="ava" ng-click="showModal('set_avatar')" ng-src="{{me.avaurl}}" title="Сменить аватарку" alt="" />
 		</div>
@@ -122,7 +124,7 @@
 
 
 <!-- <div class="overlay" ng-click="hideModal()"></div> -->
-<div class="md-modal md-effect-7" modal-window>
+<div class="md-modal md-effect-1" modal-window>
 	<div class="md-content" ng-include="modalTemplate" onload="modalLoad()"></div>
 </div>
 
