@@ -157,6 +157,7 @@ body{
     z-index: 1;
     background: url('../img/shadow.png');
 }
+/*
 .tabs-content:after{
     content:'';
     position: absolute;
@@ -167,7 +168,7 @@ body{
     z-index: 1;
     background: url('../img/shadow2.png');
 }
-
+*/
 
 .green{
     color: #388043;

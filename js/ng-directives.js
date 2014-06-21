@@ -98,18 +98,33 @@ app.directive('ngRoster', function() {
 
 app.directive('autoscrollDown', function () {
     return {
-        link: function postLink($scope, element) {
+        link: function postLink($scope, element, attrs) {
+
+			//var room = $scope.$eval(attrs.autoscrollDown);
+			var enableAutoscroll = true;
+			var forceScroll = true;
+
+			element.scroll(function(e){
+				enableAutoscroll = element.prop('offsetHeight') + element.prop('scrollTop') + 15 >= element.prop('scrollHeight');
+			});
+
+			setTimeout(function() {
+				forceScroll = false;
+			}, 3000);
+
             $scope.$watch(
                 function () {
                     return element.children().length;
                 },
                 function () {
 
-
-
-                    //if(element.prop('offsetHeight') + element.prop('scrollTop') >= element.prop('scrollHeight')) {
+                    if(enableAutoscroll || forceScroll) {
                         element.animate({ scrollTop: element.prop('scrollHeight')}, 1000);
-                    //}
+                    }
+
+					if(forceScroll) setTimeout(function() {
+						element.animate({ scrollTop: element.prop('scrollHeight')}, 1000);
+					}, 1000);
 
                 }
             );

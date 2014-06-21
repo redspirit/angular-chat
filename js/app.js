@@ -33,6 +33,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.$apply();
 
 		hitagi.join('gruppa_s_');
+		//hitagi.join('public');
 	});
 
 
@@ -56,6 +57,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.rooms[data.name] = data;
 		$scope.rooms[data.name].index = roomsIndex;
 		$scope.rooms[data.name].type = 'room';
+		$scope.rooms[data.name].nmFlag = 0;
 
 		for (var j in data.messages) {
 			$scope.rooms[data.name].messages[j].t = messageParser.parse(data.messages[j].t);

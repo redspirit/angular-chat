@@ -66,7 +66,7 @@
 		<div class="tabs-content">
 			<div ng-repeat="room in rooms" id="tabcont-{{room.name}}" room-content>
 
-				<div class="room-messages" autoscroll-down>
+				<div class="room-messages" autoscroll-down="room.name">
 					<div ng-repeat="mess in room.messages">
 						<span class="m-date" title="{{mess.d*1000 | date:'MMMM d, y hh:mm:ss'}}">{{mess.d*1000 | date:'hh:mm'}}</span>
 						<span class="m-nick">{{mess.n}}</span>
