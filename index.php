@@ -44,7 +44,7 @@
 		</div>
 
 
-		<!--<input type="button" value="PM" ng-click="personalmessage('admin')" />-->
+		<input type="button" value="PM" ng-click="testAction()" />
 
 	</div>
 	<div id="tabs">
@@ -66,7 +66,7 @@
 		<div class="tabs-content">
 			<div ng-repeat="room in rooms" id="tabcont-{{room.name}}" room-content>
 
-				<div class="room-messages" autoscroll-down="room.name">
+				<div class="room-messages" autoscroll-down>
 					<div ng-repeat="mess in room.messages">
 						<span class="m-date" title="{{mess.d*1000 | date:'MMMM d, y hh:mm:ss'}}">{{mess.d*1000 | date:'hh:mm'}}</span>
 						<span class="m-nick">{{mess.n}}</span>
@@ -75,18 +75,18 @@
 				</div>
 
 				<div class="room-info">
-					Людей в комнате: <b>{{countObj(room.users)}}</b>
+					Людей в комнате: <b>{{tools.countObj(room.users)}}</b>
 				</div>
 
-				<div class="roster" ng-roster>
+				<div class="roster">
 					<table ng-repeat="user in room.users | toArray | orderBy:'nick'" class="user">
 						<tr>
 							<td rowspan="2" scope="col" class="cc1">
 								<img class="profava" ng-src="{{user.avaurl}}" alt="" />
 							</td>
 							<td scope="col" style="padding-top:6px">
-								<img class="stateSign" ng-src="{{'img/states/'+getStateUrl(user.state)}}" alt="">
-								<div class="statetxt">{{getStateText(user.state)}}</div>
+								<img class="stateSign" ng-src="{{tools.getStateUrl(user.state)}}" alt="">
+								<div class="statetxt">{{tools.getStateText(user.state)}}</div>
 							</td>
 						</tr>
 						<tr>

@@ -16,7 +16,58 @@ app.filter("toArray", function() {
 });
 
 app.service('tools', function(){
+
+	var states = [];
+	var statesT = [];
+
+	var privas = [];
+	var privasT = [];
+
+	states[0] = 'online.png'; 		statesT[0] = 'Онлайн';
+	states[1] = 'away.png'; 		statesT[1] = 'Отошел';
+	states[2] = 'busy.png'; 		statesT[2] = 'Занят';
+	states[3] = 'stop.png'; 		statesT[3] = 'Отсутствую';
+	states[4] = 'work.png'; 		statesT[4] = 'Работаю';
+	states[5] = 'rest.png'; 		statesT[5] = 'Отдыхаю';
+	states[6] = 'game.png'; 		statesT[6] = 'Играю';
+	states[7] = 'music.png';		statesT[7] = 'Слушаю музыку';
+	states[8] = 'films.png';		statesT[8] = 'Смотрю фильм';
+	states[9] = 'food.png'; 		statesT[9] = 'Кушаю';
+	states[10] = 'coffee.png';		statesT[10] = 'Чай / кофе';
+	states[11] = 'home.png';		statesT[11] = 'Дела по дому';
+	states[12] = 'read.png';		statesT[12] = 'Читаю';
+	states[13] = 'sleep.png';		statesT[13] = 'Сплю';
+	states[14] = 'pirat.png';		statesT[14] = 'Пират';
+
+	privas[0] = 'empty.png'; 		privasT[0] = '';
+	privas[1] = 'admin.png'; 		privasT[1] = 'Админ';
+	privas[2] = 'moder.png'; 		privasT[2] = 'Модератор';
+	privas[3] = 'owner.png'; 		privasT[3] = 'Хозяин комнаты';
+	privas[4] = 'user.png'; 		privasT[4] = 'Пользователь';
+	privas[5] = 'novoice.png';		privasT[5] = 'Без голоса';
+
+	var templates = {
+		userjoined: '<b>{1}</b> зашел в комнату',
+		userleaved: '<b>{1}</b> вышел из комнаты',
+		setstate: '<b>{1}</b> сменил статус на: <b>{2}</b> <img src="{3}" alt="" />',
+		setstatus: '<b>{1}</b> сменил статусный текст на: <b>{2}</b>'
+	}
+
+
 	return {
+		tpl: function (tname, vars){
+			var template = templates[tname];
+			if(typeof vars == 'string') vars = [vars];
+			return template.replace(new RegExp('\{(.*?)\}','g'), function(a,b){
+				return vars[b-1];
+			})
+		},
+		getStateUrl: function(s) {
+			return 'img/states/' + states[parseInt(s)];
+		},
+		getStateText: function(s) {
+			return statesT[parseInt(s)];
+		},
 		timestamp: function() {
 			return Math.round(new Date().valueOf() / 1000);
 		},

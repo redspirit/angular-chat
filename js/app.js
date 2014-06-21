@@ -82,7 +82,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 		$scope.rooms[data.room].messages.push({
 			u: '',
-			t: '<b>' + nicks[data.name] + '</b> зашел в комнату',
+			t: tools.tpl('userjoined', nicks[data.name]),
 			n: '',
 			d: tools.timestamp(),
 			cls: {green: true}
@@ -98,7 +98,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 		$scope.rooms[data.room].messages.push({
 			u: '',
-			t: '<b>' + nicks[data.name] + '</b> вышел из комнаты',
+			t: tools.tpl('userleaved', nicks[data.name]),
 			n: '',
 			d: tools.timestamp(),
 			cls: {red: true}
@@ -185,7 +185,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 				$scope.rooms[i].messages.push({
 					u: '',
-					t: '<b>' + nicks[data.user] + '</b> сменил статус на ' + data.val,
+					t: tools.tpl('setstate', [nicks[data.user], tools.getStateText(data.val), tools.getStateUrl(data.val)]),
 					n: '',
 					d: tools.timestamp(),
 					cls: {blue: true}
@@ -206,7 +206,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 				$scope.rooms[i].messages.push({
 					u: '',
-					t: '<b>' + nicks[data.user] + '</b> сменил статусный текст на: ' + data.text,
+					t: tools.tpl('setstus', [nicks[data.user], data.text]),
 					n: '',
 					d: tools.timestamp(),
 					cls: {blue: true}
@@ -218,6 +218,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.$apply();
 
 	});
+
+
 
 
 
@@ -261,7 +263,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	}
 
 
-	$scope.countObj = tools.countObj;
+	$scope.tools = tools;
 
 	$scope.messagesForms = {
 		0: 'Нет сообщений',

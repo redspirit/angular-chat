@@ -301,7 +301,7 @@ img.smile{
 button {
     border: none;
     padding: 0.6em 1.2em;
-    background: #2967B6;
+    background: rgba(24, 117, 255, 0.80);
     color: #fff;
     font-size: 1em;
     letter-spacing: 1px;
@@ -312,5 +312,5 @@ button {
     border-radius: 2px;
 }
 button:hover {
-    background: #114E9C;
+    background: #186CD6;
 }
