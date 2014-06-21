@@ -6,6 +6,9 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+
 	<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
 	<link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css" >
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
