@@ -6,11 +6,8 @@
     left: 0;
     height: 100%;
     width: 100%;
-    opacity: 0.5;
+    opacity: 0;
     background-color: #089BA2;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
 }
 
 .md-modal {
@@ -106,10 +103,10 @@
     opacity: 1;
 }
 
-.md-show.md-effect-1 ~ .wrap {
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    filter: blur(3px);
+.blur {
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    filter: grayscale(1);
 }
 
 /* Effect 2: 3D sign */

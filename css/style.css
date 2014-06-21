@@ -9,7 +9,7 @@ body{
     bottom: 0;
 }
 .header{
-	height:115px;
+	height:112px;
     background: #054a71 url('../img/head-background.jpg') 100% 100% no-repeat;
 }
 #tabs{
@@ -24,10 +24,11 @@ body{
     position: absolute;
     right: 0;
     bottom: 0;
-    top: 35px;
+    top: 32px;
     width: 220px;
-    background: url('../img/roster.jpg');
+    background: url('../img/roster.png');
     overflow: hidden;
+    border-bottom: 1px solid #C9C7C7;
 }
 
 .roster .user {
@@ -75,11 +76,15 @@ body{
     bottom:0;
     top:32px;
     overflow: hidden;
-    background: url('../backgrounds/fon5.jpg') no-repeat bottom right;
-    background-size: cover;
+    background: transparent;
     font-size: 16px;
     padding-left: 4px;
     padding-bottom: 5px;
+    box-shadow: inset 0px 0px 10px 0px rgba(50, 50, 50, 0.77);
+}
+.room-messages img{
+    z-index: -1;
+    position: relative;
 }
 .input{
 	position:absolute;
@@ -87,7 +92,6 @@ body{
 	right:220px;
 	bottom:0;
 	height:30px;
-	border-top: 1px solid #C9C7C7;
 }
 .tools{
 	position:absolute;
@@ -95,7 +99,6 @@ body{
 	bottom:0;
 	height:30px;
 	width:220px;
-	border-top: 1px solid #C9C7C7;
 }
 
 .block-screen{
@@ -130,6 +133,13 @@ body{
     height: 29px;
     padding: 0 5px;
     margin-right: 50px;
+    margin-left: 5px;
+    padding-left: 22px;
+    background: url('../img/pencil.png') no-repeat center left;
+}
+input.message-field:focus{
+    outline: none;
+    background: url('../img/pencil-active.png') no-repeat center left;
 }
 
 .room-messages > div{
@@ -148,27 +158,19 @@ body{
 .room-messages .m-text {
 
 }
-.tabs-content:before{
-    content:'';
-    position: absolute;
-    height: 10px;
-    width: 100%;
-    margin-left: -220px;
-    z-index: 1;
-    background: url('../img/shadow.png');
-}
-/*
 .tabs-content:after{
-    content:'';
+    /*background-color: rgb(235, 253, 212);*/
+    content: "";
     position: absolute;
-    bottom: -1px;
-    height: 10px;
-    width: 100%;
-    margin-left: -220px;
-    z-index: 1;
-    background: url('../img/shadow2.png');
+    top: 30px;
+    left: 0;
+    right: 220px;
+    bottom: 0;
+    z-index: -2;
+    background: url('../backgrounds/arrow.jpg') no-repeat bottom right;
+    background-size: cover;
 }
-*/
+
 
 .green{
     color: #388043;

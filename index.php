@@ -123,7 +123,7 @@
 
 
 
-<!-- <div class="overlay" ng-click="hideModal()"></div> -->
+<div class="overlay" ng-click="hideModal()"></div>
 <div class="md-modal md-effect-1" modal-window>
 	<div class="md-content" ng-include="modalTemplate" onload="modalLoad()"></div>
 </div>

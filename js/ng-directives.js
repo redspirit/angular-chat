@@ -91,6 +91,7 @@ app.directive('modalWindow', function () {
 
 		var loadFlag = 0;
 		var overlay = $('.overlay');
+		var wrap = $('.wrap');
 		var oldTpl = '';
         $scope.modalTemplate = 'templates/blank.html';
 
@@ -100,6 +101,7 @@ app.directive('modalWindow', function () {
 				setTimeout(function() {
 					elem.addClass('md-show');
 					overlay.addClass('md-show');
+					wrap.addClass('blur');
 				}, 50);
 			}
 
@@ -112,6 +114,7 @@ app.directive('modalWindow', function () {
 			if(oldTpl == newTpl) {
 				elem.addClass('md-show');
 				overlay.addClass('md-show');
+				wrap.addClass('blur');
 			} else {
 				$scope.modalTemplate = newTpl;
 				oldTpl = newTpl;
@@ -122,6 +125,7 @@ app.directive('modalWindow', function () {
 			loadFlag = 0;
 			elem.removeClass('md-show');
 			overlay.removeClass('md-show');
+			wrap.removeClass('blur');
 		}
 
     }
