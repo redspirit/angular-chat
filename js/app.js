@@ -94,7 +94,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			t: tools.tpl('userjoined', nicks[data.name]),
 			n: '',
 			d: tools.timestamp(),
-			cls: {green: true}
+			cls: {green: true},
+			sys: 1
 		});
 
 		$scope.$apply();
@@ -110,7 +111,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			t: tools.tpl('userleaved', nicks[data.name]),
 			n: '',
 			d: tools.timestamp(),
-			cls: {red: true}
+			cls: {red: true},
+			sys: 1
 		});
 
 		$scope.$apply();
@@ -200,7 +202,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 					t: tools.tpl('setstate', [nicks[data.user], tools.getStateText(data.val), tools.getStateUrl(data.val)]),
 					n: '',
 					d: tools.timestamp(),
-					cls: {blue: true}
+					cls: {blue: true},
+					sys: 1
 				});
 
 			}
@@ -218,10 +221,11 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 				$scope.rooms[i].messages.push({
 					u: '',
-					t: tools.tpl('setstus', [nicks[data.user], data.text]),
+					t: tools.tpl('setstatus', [nicks[data.user], data.text]),
 					n: '',
 					d: tools.timestamp(),
-					cls: {blue: true}
+					cls: {blue: true},
+					sys: 1
 				});
 
 			}
@@ -248,7 +252,65 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.posModalShow(currentPosModal);
 
 	});
+	hitagi.bind('settopic', function(data){
+		$scope.rooms[data.room].messages.push({
+			u: '',
+			t: tools.tpl('settopic', data.topic),
+			n: '',
+			d: tools.timestamp(),
+			cls: {},
+			sys: 1
+		});
+		$scope.$apply();
+	});
+	hitagi.bind('setavatar', function(data){
+		var user;
+		for(var i in $scope.rooms) {
+			user = $scope.rooms[i].users[data.user];
+			if(user) {
+				user.avaurl = data.newnick;
+				$scope.rooms[i].messages.push({
+					u: '',
+					t: tools.tpl('setavatar', [nicks[data.user], data.url]),
+					n: '',
+					d: tools.timestamp(),
+					cls: {green: true},
+					sys: 1
+				});
+			}
+		}
+		$scope.$apply();
+	});
+	hitagi.bind('setnick', function(data){
+		var user;
+		for(var i in $scope.rooms) {
+			user = $scope.rooms[i].users[data.user];
+			if(user) {
+				user.nick = data.newnick;
+				$scope.rooms[i].messages.push({
+					u: '',
+					t: tools.tpl('setnick', [nicks[data.user], data.newnick]),
+					n: '',
+					d: tools.timestamp(),
+					cls: {green: true},
+					sys: 1
+				});
+			}
+		}
+		$scope.$apply();
+	});
+	hitagi.bind('gethistory', function(data){
 
+		if(data.messages.length > 0) {
+			$scope.rooms[activeRoom].messages = data.messages.reverse().concat($scope.rooms[activeRoom].messages);
+			$scope.$apply();
+		}
+		
+	});
+
+
+
+	/***********************************************************************************************************/
 
 
 
@@ -304,8 +366,15 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	}
 
 	$scope.testAction = function(){
+		var msgs = $scope.rooms[activeRoom].messages;
+		var count = 0;
+		for (var i in msgs) {
+			if(!msgs[i].sys) {
+				count++;
+			}
+		}
 
-
+		hitagi.getHistory(activeRoom, count);
 
 	}
 

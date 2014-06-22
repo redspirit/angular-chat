@@ -91,7 +91,6 @@ app.service('net', function(){
 				type:'getmessages'
 			});
 		}
-
         this.setState = function(state){
             self.send({
                 val: state,
@@ -124,14 +123,17 @@ app.service('net', function(){
 				type:'getprofile'
 			});
 		}
+		this.getHistory = function(room, skip){
+			self.send({
+				room: room,
+				skip: skip,
+				count: 50,
+				type:'gethistory'
+			});
+		}
 
 
 	}
-
-
-
-
-
 
 
 

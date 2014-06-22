@@ -52,7 +52,10 @@ app.service('tools', function(){
 		userjoined: '<b>{1}</b> зашел в комнату',
 		userleaved: '<b>{1}</b> вышел из комнаты',
 		setstate: '<b>{1}</b> сменил статус на: <b>{2}</b> <img src="{3}" alt="" />',
-		setstatus: '<b>{1}</b> сменил статусный текст на: <b>{2}</b>'
+		setstatus: '<b>{1}</b> сменил статусный текст на: <b>{2}</b>',
+		settopic: '<p class="new-topic">Новый топик: <b>{1}</b></p>',
+		setavatar: '<b>{1}</b> сменил аватарку <img class="border-ava" src="{2}" alt="" />',
+		setnick: '<b>{1}</b> поставил себе новый ник: <b>{2}</b>'
 	}
 
 
@@ -61,7 +64,6 @@ app.service('tools', function(){
 			var template = templates[tname];
 			if(typeof vars == 'string') vars = [vars];
 			return template.replace(new RegExp('\{(.*?)\}','g'), function(a,b){
-				console.log('tpl', vars);
 				return vars[b-1];
 			})
 		},
