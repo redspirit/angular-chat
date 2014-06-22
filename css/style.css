@@ -9,8 +9,9 @@ body{
     bottom: 0;
 }
 .header{
-	height:112px;
-    background: #054a71 url('../img/head-background.jpg') 100% 100% no-repeat;
+    height: 112px;
+    background: #97BCD1 url('../img/head-background.png') no-repeat center center;
+    background-size: 100% 100%;
 }
 #tabs{
 	position:absolute;
