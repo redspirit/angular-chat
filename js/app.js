@@ -305,7 +305,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			$scope.rooms[activeRoom].messages = data.messages.reverse().concat($scope.rooms[activeRoom].messages);
 			$scope.$apply();
 		}
-		
+
 	});
 
 

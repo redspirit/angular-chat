@@ -87,7 +87,7 @@ app.service('net', function(){
 		this.getMessages = function(user){
 			self.send({
 				from: user,
-				count: 30,
+				count: 50,
 				type:'getmessages'
 			});
 		}
@@ -127,7 +127,7 @@ app.service('net', function(){
 			self.send({
 				room: room,
 				skip: skip,
-				count: 50,
+				count: 30,
 				type:'gethistory'
 			});
 		}

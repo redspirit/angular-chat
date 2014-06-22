@@ -168,6 +168,11 @@ app.directive('autoscrollDown', function () {
 
 			element.scroll(function(e){
 				enableAutoscroll = element.prop('offsetHeight') + element.prop('scrollTop') + 15 >= element.prop('scrollHeight');
+
+				if(element.prop('scrollTop')  == 0) {
+					$scope.testAction();
+				}
+				
 			});
 
 			setTimeout(function() {
