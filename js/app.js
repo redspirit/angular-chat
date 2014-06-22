@@ -1,5 +1,5 @@
 var app = angular.module('ChatApp', []);
-var chatName = 'Hitagi Chat 3';
+var chatName = 'Хитаги чат 3';
 
 app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sounds){
 

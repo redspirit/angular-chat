@@ -1,3 +1,35 @@
+.dtooltip{
+    visibility: hidden;
+    position: absolute;
+    z-index: 8;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.76);
+    color: white;
+    font-size: 12px;
+    left: 6px;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+
+
+}
+.dtooltip:after{
+    content: "";
+    position: absolute;
+    width: 0;
+    top: 100%;
+    left: 13px;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(0, 0, 0, 0.76);
+    border-bottom: 6px solid transparent;
+}
+.md-show.dtooltip{
+    opacity: 1;
+}
+
 .pos-modal {
     visibility: hidden;
     position: absolute;

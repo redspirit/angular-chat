@@ -19,7 +19,7 @@ app.directive('ngEnter', function() {
 			}
 		});
 
-		$('.tabs-content').on('click', '.m-nick', function(){
+		$('.tabs-content').on('click', '.m-nick, .profnick', function(){
 			var text = ' ' + $(this).html() + ': ';
 
 			$scope.messageText = $scope.messageText + text;
@@ -55,9 +55,42 @@ app.directive('toolsPanel', function() {
 });
 
 app.directive('roomContent', function() {
+
+	var tooltip = $('.dtooltip');
+
 	return function($scope, elem, attrs) {
+		var tooltipShow = 0;
 		elem.find('.roster').perfectScrollbar({'wheelSpeed':10, 'suppressScrollX':true});
 		elem.find('.room-messages').perfectScrollbar({'wheelSpeed':10, 'suppressScrollX':true});
+		elem.on('mouseenter', '.m-date', function(){
+			var text = $(this).attr('mtitle');
+			var top = $(this).offset().top - 28;
+
+			tooltipShow = 1;
+
+			tooltip.html(text);
+			tooltip.css('top', top+'px');
+			tooltip.addClass('md-show');
+
+		});
+		elem.on('mousemove', function(e){
+
+			if(e.pageX > 40 && tooltipShow) {
+				tooltip.removeClass('md-show');
+				tooltipShow = 0;
+			}
+
+			/*if(tooltipShow == 0) return;
+
+			setTimeout(function() {
+
+			}, 100);*/
+
+
+
+		});
+
+
 	}
 });
 

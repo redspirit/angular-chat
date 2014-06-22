@@ -61,7 +61,7 @@ body{
     font-weight: bold;
     cursor: pointer;
     margin-top: -5px;
-    font-size: 13px;
+    font-size: 14px;
     margin-bottom: 2px;
 }
 .roster .profnick:hover {
@@ -155,7 +155,9 @@ input.message-field:focus{
 .room-messages .m-date {
     font-size: 75%;
     font-style: italic;
-    color: gray;
+    color: rgb(92, 92, 92);
+    padding: 0 2px;
+    cursor: pointer;
 }
 .room-messages .m-nick {
     font-weight: bold;
