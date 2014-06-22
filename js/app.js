@@ -1,6 +1,7 @@
 var app = angular.module('ChatApp', []);
 var chatName = 'Хитаги чат 3';
 var activeRoom;
+var chatFocused = true;
 
 app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sounds){
 
@@ -51,7 +52,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			n: nicks[data.u],
 			d: tools.timestamp()
 		});
-		if(data.r != activeRoom) $scope.rooms[data.r].unread++;
+		if(data.r != activeRoom || !chatFocused) $scope.rooms[data.r].unread++;
 		tools.checkUnreads($scope.rooms);
 		$scope.$apply();
 
@@ -173,7 +174,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 				n: data.n,
 				d: data.d
 			});
-			if(room != activeRoom) $scope.rooms[room].unread++;
+			if(room != activeRoom || !chatFocused) $scope.rooms[room].unread++;
 			tools.checkUnreads($scope.rooms);
 			$scope.$apply();
 

@@ -239,6 +239,24 @@ app.directive('modalWindow', function () {
     }
 });
 
+app.directive('wrapBlock', function(tools) {
+	return function($scope, elem) {
+
+		window.focus();
+		$(window).bind('focus', function() {
+			chatFocused = true;
+			$scope.rooms[activeRoom].unread = 0;
+			$scope.$apply();
+			$('title').html(chatName);
+		});
+		$(window).bind('blur', function() {
+			chatFocused = false;
+		});
+
+	}
+});
+
+
 app.directive('smileBlock', function() {
 
 	var smiles = {

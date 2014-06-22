@@ -61,6 +61,7 @@ app.service('tools', function(){
 			var template = templates[tname];
 			if(typeof vars == 'string') vars = [vars];
 			return template.replace(new RegExp('\{(.*?)\}','g'), function(a,b){
+				console.log('tpl', vars);
 				return vars[b-1];
 			})
 		},
