@@ -172,7 +172,7 @@ app.directive('autoscrollDown', function () {
 				if(element.prop('scrollTop')  == 0) {
 					$scope.testAction();
 				}
-				
+
 			});
 
 			setTimeout(function() {

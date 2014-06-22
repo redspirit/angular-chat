@@ -95,6 +95,9 @@ body{
     position: relative;
     vertical-align: bottom;
 }
+.m-text a:hover img{
+    position: static;
+}
 .input{
 	position:absolute;
 	left:0;
@@ -108,26 +111,6 @@ body{
 	bottom:0;
 	height:30px;
 	width:220px;
-}
-
-.block-screen{
-	position:fixed;
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	z-index: 1000;
-	background: rgb(200, 238, 253) url('../img/start-background.jpg');
-	background-size: 100%;
-}
-.screen-block{
-	width:600px;
-	height: 400px;
-	padding: 20px;
-	margin: 10% auto 0 auto;
-	background-color: white;
-	border: 1px solid gray;
-	border-radius: 10px;
 }
 
 

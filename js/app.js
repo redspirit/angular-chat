@@ -42,13 +42,11 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		hitagi.join('gruppa_s_');
 		//hitagi.join('public');
 	});
-
-
 	hitagi.bind('chat', function(data){
 
 		$scope.rooms[data.r].messages.push({
 			u: data.u,
-			t: messageParser.parse(data.t),
+			t: data.t,
 			n: nicks[data.u],
 			d: tools.timestamp()
 		});
@@ -67,11 +65,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.rooms[data.name].index = roomsIndex;
 		$scope.rooms[data.name].type = 'room';
 		$scope.rooms[data.name].unread = 0;
-
-		for (var j in data.messages) {
-			$scope.rooms[data.name].messages[j].t = messageParser.parse(data.messages[j].t);
-		}
-
 
 		$scope.$apply();
 		activeRoom = data.name;
@@ -345,6 +338,9 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	}
 
+	$scope.messageHtmlParse = function(m) {
+		return $sce.trustAsHtml(messageParser.parse(m));
+	}
 	$scope.messageHtml = function(m) {
 		return $sce.trustAsHtml(m);
 	}
