@@ -7,11 +7,19 @@
 
 app.service('net', function(){
 	var ws;
-
 	var Start = function(server) {
 
 		var self = this;
 		ws = new WebSocket('ws://' + server);
+
+		var errorHandler = function(msg){
+			if(msg.type == 'getprofile' && msg.reason == 'notallowed') {
+				self.trigger('error', 'Профиль этого пользователя скрыт');
+				return;
+			}
+
+			self.trigger('error', 'Ошибка: ' + msg.reason + ' [' + msg.type + ']');
+		}
 
 
 		ws.onopen = function() {
@@ -30,6 +38,7 @@ app.service('net', function(){
                 self.trigger(tp, msg);
             } else {
                 console.log('ERROR [' + msg.type + ']: ' + msg.reason);
+				errorHandler(msg);
             }
 
 		}

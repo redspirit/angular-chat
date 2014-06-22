@@ -72,7 +72,7 @@
 
 				<div class="room-messages" autoscroll-down>
 					<div ng-repeat="mess in room.messages">
-						<span class="m-date" mtitle="{{mess.d*1000 | date:'d MMMM, hh:mm:ss'}}">{{mess.d*1000 | date:'hh:mm'}}</span>
+						<span class="m-date" id="{{mess.id}}" mtitle="{{mess.d*1000 | date:'d MMMM, hh:mm:ss'}}">{{mess.d*1000 | date:'hh:mm'}}</span>
 						<span class="m-nick">{{mess.n}}</span>
 						<span class="m-text" ng-bind-html="messageHtml(mess.t)" ng-class="mess.cls"></span>
 					</div>
@@ -141,7 +141,14 @@
 	</div>
 </div>
 
-<div class="dtooltip"></div>
+<div class="dtooltip">
+	<span></span>
+	<img src="img/tab-close.png" alt="" title="Скрыть это сообщение" />
+</div>
+
+<div class="error-notify" title="Закрыть сообщение" error-notify>
+	{{errorMessage}}
+</div>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 var app = angular.module('ChatApp', []);
 var chatName = 'Хитаги чат 3';
+var activeRoom;
 
 app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sounds){
 
@@ -9,7 +10,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		login: 'u172144439'
 	}
 
-	var activeRoom;
 	var nicks = {};
 	var roomsIndex = 0;
 	var myLogin = 'u172144439';
@@ -18,6 +18,10 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	hitagi.bind('open', function(data){
 		hitagi.auth();
+	});
+
+	hitagi.bind('error', function(data){
+		$scope.showErrorNotify(data);
 	});
 
 	hitagi.bind('vkauth', function(data){
@@ -299,6 +303,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	}
 
 	$scope.testAction = function(){
+
 
 
 	}

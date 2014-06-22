@@ -54,42 +54,65 @@ app.directive('toolsPanel', function() {
 	}
 });
 
+app.directive('errorNotify', function() {
+	return function($scope, elem) {
+
+		$scope.showErrorNotify = function(text) {
+			$scope.errorMessage = text;
+			$scope.$apply();
+			elem.addClass('md-show');
+		}
+
+		elem.click(function(){
+			elem.removeClass('md-show');
+		});
+
+	}
+});
+
 app.directive('roomContent', function() {
 
 	var tooltip = $('.dtooltip');
 
 	return function($scope, elem, attrs) {
 		var tooltipShow = 0;
+		var currentMessId = '';
+
 		elem.find('.roster').perfectScrollbar({'wheelSpeed':10, 'suppressScrollX':true});
 		elem.find('.room-messages').perfectScrollbar({'wheelSpeed':10, 'suppressScrollX':true});
 		elem.on('mouseenter', '.m-date', function(){
-			var text = $(this).attr('mtitle');
-			var top = $(this).offset().top - 28;
+			var em = $(this);
+			var text = em.attr('mtitle');
+			var top = em.offset().top - 26;
+			currentMessId = em.attr('id');
 
 			tooltipShow = 1;
 
-			tooltip.html(text);
+			tooltip.find('span').html(text);
 			tooltip.css('top', top+'px');
 			tooltip.addClass('md-show');
 
 		});
 		elem.on('mousemove', function(e){
-
 			if(e.pageX > 40 && tooltipShow) {
 				tooltip.removeClass('md-show');
 				tooltipShow = 0;
 			}
-
-			/*if(tooltipShow == 0) return;
-
-			setTimeout(function() {
-
-			}, 100);*/
-
-
-
 		});
-
+		tooltip.on('click', 'img', function(){
+			if(currentMessId) {
+				var room = $scope.rooms[activeRoom];
+				for (var i in room.messages) {
+					if(room.messages[i].id == currentMessId) {
+						$scope.rooms[activeRoom].messages.splice(i,1);
+						$('#' + currentMessId).parent().slideUp(300, function(){
+							$scope.$apply();
+						});
+						return false;
+					}
+				}
+			}
+		});
 
 	}
 });
