@@ -312,6 +312,10 @@ img.smile{
     margin-top: 66px;
 }
 
+.fancy-pic{
+    display: inline-block;
+}
+
 /* button */
 
 button {

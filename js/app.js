@@ -340,9 +340,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 
     // todo использовать только поле bot
-
     $scope.showNick = function(mess) {
-        if(mess.sys || mess.bot || mess.isbot) {
+        if(mess.bot || mess.isbot) {
             return '';
         } else {
             return mess.n;
