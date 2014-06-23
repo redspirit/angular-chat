@@ -338,8 +338,22 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 
 	}
 
-	$scope.messageHtmlParse = function(m) {
-		return $sce.trustAsHtml(messageParser.parse(m));
+
+    // todo использовать только поле bot
+
+    $scope.showNick = function(mess) {
+        if(mess.sys || mess.bot || mess.isbot) {
+            return '';
+        } else {
+            return mess.n;
+        }
+    }
+	$scope.messageHtmlParse = function(mess) {
+        if(mess.sys || mess.bot || mess.isbot) {
+            return $sce.trustAsHtml(mess.t);
+        } else {
+            return $sce.trustAsHtml(messageParser.parse(mess.t));
+        }
 	}
 	$scope.messageHtml = function(m) {
 		return $sce.trustAsHtml(m);
