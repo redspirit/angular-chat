@@ -119,9 +119,13 @@ app.service('sounds', function(){
 	var canPlayMp3 = !!audio.canPlayType && audio.canPlayType('audio/mp3') != "";
 	var canPlayOgg = !!audio.canPlayType && audio.canPlayType('audio/ogg; codecs="vorbis"') != "";
 	var map = {
-		's1':'sounds/alert_26',
-		's2':'sounds/alert_36',
-		'message':'sounds/alert_asterisk_13'
+		'chat':'sounds/chat',
+		'disconnect':'sounds/disconnect',
+		'event':'sounds/event',
+		'foryou':'sounds/foryou',
+		'history_load':'sounds/history_load',
+		'user_joined':'sounds/user_joined',
+		'user_leave':'sounds/user_leave'
 	}
 
 	var ext;

@@ -191,7 +191,7 @@ app.directive('autoscrollDown', function () {
 
 					if(forceScroll) setTimeout(function() {
 						element.animate({ scrollTop: element.prop('scrollHeight')}, 1000);
-					}, 1000);
+					}, 800);
 
                 }
             );

@@ -54,7 +54,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		tools.checkUnreads($scope.rooms);
 		$scope.$apply();
 
-		if(data.u != myLogin) sounds.play('message');
+		if(data.u != myLogin) sounds.play('chat');
 
 	});
 
@@ -91,6 +91,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			sys: 1
 		});
 
+		sounds.play('user_joined');
 		$scope.$apply();
 
 	});
@@ -108,6 +109,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			sys: 1
 		});
 
+		sounds.play('user_leave');
 		$scope.$apply();
 
 	});
@@ -178,6 +180,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			hitagi.getMessages(data.u);
 		}
 
+		sounds.play('chat');
 
 	});
 
@@ -202,6 +205,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			}
 		}
 		$scope.$apply();
+		sounds.play('event');
 
 	});
 	hitagi.bind('setstatus', function(data){
@@ -225,6 +229,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		}
 
 		$scope.$apply();
+		sounds.play('event');
 
 	});
 	hitagi.bind('getprofile', function(data){
@@ -255,6 +260,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			sys: 1
 		});
 		$scope.$apply();
+		sounds.play('event');
 	});
 	hitagi.bind('setavatar', function(data){
 		var user;
@@ -273,6 +279,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			}
 		}
 		$scope.$apply();
+		sounds.play('event');
 	});
 	hitagi.bind('setnick', function(data){
 		var user;
@@ -291,12 +298,14 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			}
 		}
 		$scope.$apply();
+		sounds.play('event');
 	});
 	hitagi.bind('gethistory', function(data){
 
 		if(data.messages.length > 0) {
 			$scope.rooms[activeRoom].messages = data.messages.reverse().concat($scope.rooms[activeRoom].messages);
 			$scope.$apply();
+			sounds.play('history_load');
 		}
 
 	});
