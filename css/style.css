@@ -316,6 +316,27 @@ img.smile{
     display: inline-block;
 }
 
+.last-message{
+    text-align: center;
+    color: rgb(226, 24, 24);
+    font-size: 12px;
+}
+.last-message span{
+    border: 1px solid red;
+    border-radius: 10px;
+    padding: 0px 6px;
+    background: rgb(215, 228, 235);
+}
+.last-message hr{
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid red;
+    border-top: none;
+    width: 95%;
+    margin-left: 2%;
+    margin-top: -8px;
+}
+
 /* button */
 
 button {

@@ -24,7 +24,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	hitagi.bind('error', function(data){
 		$scope.showErrorNotify(data);
 	});
-
 	hitagi.bind('vkauth', function(data){
 
 		$scope.me = {
@@ -52,6 +51,13 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		});
 		if(data.r != activeRoom || !chatFocused) $scope.rooms[data.r].unread++;
 		tools.checkUnreads($scope.rooms);
+
+		if(!chatFocused && $scope.rooms[data.r].last_mess === 0) {
+			var lastIndex = $scope.rooms[data.r].messages.length - 2;
+			$scope.rooms[data.r].messages[lastIndex].last = 1;
+			$scope.rooms[data.r].last_mess = lastIndex;
+		}
+
 		$scope.$apply();
 
 		if(data.u != myLogin) sounds.play('chat');
@@ -65,6 +71,7 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.rooms[data.name].index = roomsIndex;
 		$scope.rooms[data.name].type = 'room';
 		$scope.rooms[data.name].unread = 0;
+		$scope.rooms[data.name].last_mess = 0;
 
 		$scope.$apply();
 		activeRoom = data.name;
@@ -95,7 +102,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.$apply();
 
 	});
-
 	hitagi.bind('userleaved', function(data){
 
 		delete $scope.rooms[data.room].users[data.name];
@@ -113,7 +119,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.$apply();
 
 	});
-
 	hitagi.bind('leaveroom', function(data){
 		delete $scope.rooms[data.room];
 		$scope.$apply();
@@ -121,7 +126,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		activeRoom = tools.getFirst($scope.rooms);
 		tools.selectRoom(activeRoom);
 	});
-
 	hitagi.bind('getmessages', function(data){
 
 		var roomName = 'pm-' + data.user.login;
@@ -139,7 +143,8 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 			user: data.user.login,
 			type: 'pm',
 			users: users,
-			unread: 0
+			unread: 0,
+			last_mess: 0
 		}
 		$scope.$apply();
 		activeRoom = roomName;
@@ -149,7 +154,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		tools.selectRoom(activeRoom);
 
 	});
-
 	hitagi.bind('recmes', function(msg){
 
 		var room;
@@ -183,7 +187,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		sounds.play('chat');
 
 	});
-
 	hitagi.bind('setstate', function(data){
 
 		var user;
@@ -315,7 +318,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	/***********************************************************************************************************/
 
 
-
 	$scope.tabClick = function(tab){
 		activeRoom = tab;
 		$scope.rooms[tab].unread = 0;
@@ -326,7 +328,15 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		if(!activeRoom) return;
 
 		if($scope.rooms[activeRoom].type == 'room') {
+
+			var lastmess = $scope.rooms[activeRoom].last_mess;
+			if(lastmess > 0) {
+				$scope.rooms[activeRoom].messages[lastmess].last = 0;
+				$scope.rooms[activeRoom].last_mess = 0;
+			}
+
 			hitagi.chat(text, activeRoom);
+
 			$scope.me.messcount++;
 		} else {
 			hitagi.sendMess($scope.rooms[activeRoom].user, text);
