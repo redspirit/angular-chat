@@ -119,9 +119,9 @@
 		<input type="text" class="message-field" ng-model="messageText" ng-enter>
 	</div>
 	<div class="tools" tool-spanel>
-		<div ng-repeat="btn in toolsItems">
-			{{btn.name}}
-		</div>
+		<div class="smile-btn" ng-click="smileClick()"></div>
+		<div ng-class="tools.soundCls" ng-click="soundClick()"></div>
+		<div ng-class="tools.notifCls" ng-click="notifClick()"></div>
 	</div>
 </div>
 

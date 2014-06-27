@@ -186,12 +186,6 @@ input.message-field:focus{
 .border-ava{
     border-radius: 8px;
 }
-.tools > div {
-    float: left;
-    padding: 2px;
-    margin: 2px;
-    border: 1px solid #8b0000;
-}
 
 #tabs .tabs-inset{
     list-style: none;
@@ -354,4 +348,33 @@ button {
 }
 button:hover {
     background: #186CD6;
+}
+
+/* tools */
+
+.tools > div {
+    float: left;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 5px 10px 0 0;
+    cursor: pointer;
+}
+.tools > div:hover {
+
+}
+.sound-on{
+    background: url('../img/tools/sound_on.png') no-repeat;
+}
+.sound-off{
+    background: url('../img/tools/sound_off.png') no-repeat;
+}
+.notif-on{
+    background: url('../img/tools/notif_on.png') no-repeat;
+}
+.notif-off{
+    background: url('../img/tools/notif_off.png') no-repeat;
+}
+.smile-btn{
+    background: url('../img/tools/smile.png') no-repeat;
 }
