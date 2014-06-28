@@ -383,18 +383,20 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 	}
 	$scope.soundClick = function(){
 		soundEnabled = !soundEnabled;
-		$scope.tools.soundCls = {'sound-on': soundEnabled, 'sound-off':!soundEnabled}
+		$scope.toolpanel.soundCls = {'sound-on': soundEnabled, 'sound-off':!soundEnabled}
 	}
 	$scope.notifClick = function(){
 		notifEnabled = !notifEnabled;
-		$scope.tools.notifCls = {'notif-on': notifEnabled, 'notif-off': !notifEnabled}
+		$scope.toolpanel.notifCls = {'notif-on': notifEnabled, 'notif-off': !notifEnabled}
 	}
 
 
 	var soundEnabled = true;
 	var notifEnabled = true;
 
-	$scope.tools = {
+	$scope.tools = tools;
+
+	$scope.toolpanel = {
 		soundCls: {'sound-on': soundEnabled, 'sound-off': !soundEnabled},
 		notifCls: {'notif-on': notifEnabled, 'notif-off': !notifEnabled}
 	};

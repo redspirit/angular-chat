@@ -120,8 +120,8 @@
 	</div>
 	<div class="tools" tool-spanel>
 		<div class="smile-btn" ng-click="smileClick()"></div>
-		<div ng-class="tools.soundCls" ng-click="soundClick()"></div>
-		<div ng-class="tools.notifCls" ng-click="notifClick()"></div>
+		<div ng-class="toolpanel.soundCls" ng-click="soundClick()"></div>
+		<div ng-class="toolpanel.notifCls" ng-click="notifClick()"></div>
 	</div>
 </div>
 
