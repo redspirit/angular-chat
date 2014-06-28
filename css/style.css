@@ -378,3 +378,12 @@ button:hover {
 .smile-btn{
     background: url('../img/tools/smile.png') no-repeat;
 }
+.colors-btn{
+    background: url('../img/tools/colors.png') no-repeat;
+}
+.statustext-btn{
+    background: url('../img/tools/status.png') no-repeat;
+}
+.status-btn{
+    background: url('../img/states/online.png') no-repeat;
+}

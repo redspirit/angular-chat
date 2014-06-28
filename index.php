@@ -119,9 +119,12 @@
 		<input type="text" class="message-field" ng-model="messageText" ng-enter>
 	</div>
 	<div class="tools" tool-spanel>
+		<div class="status-btn" ng-click="statusClick()"></div>
 		<div class="smile-btn" ng-click="smileClick()"></div>
 		<div ng-class="toolpanel.soundCls" ng-click="soundClick()"></div>
 		<div ng-class="toolpanel.notifCls" ng-click="notifClick()"></div>
+		<div class="statustext-btn" ng-click="statusTextClick()"></div>
+		<div class="colors-btn" ng-click="colorsClick()"></div>
 	</div>
 </div>
 
