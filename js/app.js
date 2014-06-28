@@ -2,20 +2,22 @@ var app = angular.module('ChatApp', []);
 var chatName = 'Хитаги чат 3';
 var activeRoom;
 var chatFocused = true;
+var hitagi;
 
 app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sounds){
 
 	var currentPosModal = 0;
 	$scope.rooms = {};
 	$scope.me = {
-		login: 'u172144439'
+		login: 'u172144439',
+		state: 0
 	}
 
 	var nicks = {};
 	var roomsIndex = 0;
 	var myLogin = 'u172144439';
 
-	var hitagi = new net.start('aniavatars.com:8080');
+	hitagi = new net.start('aniavatars.com:8080');
 
 	hitagi.bind('open', function(data){
 		hitagi.auth();
@@ -63,7 +65,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		if(data.u != myLogin) sounds.play('chat');
 
 	});
-
 	hitagi.bind('joinroom', function(data){
 
 		roomsIndex++;
@@ -83,7 +84,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		tools.selectRoom(activeRoom);
 
 	});
-
 	hitagi.bind('userjoined', function(data){
 
 		$scope.rooms[data.room].users[data.name] = data.data;

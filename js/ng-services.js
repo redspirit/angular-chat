@@ -28,8 +28,8 @@ app.service('tools', function(){
 	states[0] = 'online.png'; 		statesT[0] = 'Онлайн';
 	states[1] = 'away.png'; 		statesT[1] = 'Отошел';
 	states[2] = 'busy.png'; 		statesT[2] = 'Занят';
-	states[3] = 'stop.png'; 		statesT[3] = 'Отсутствую';
-	states[4] = 'work.png'; 		statesT[4] = 'Работаю';
+	states[3] = 'work.png'; 		statesT[3] = 'Работаю';
+	states[4] = 'learn.png'; 		statesT[4] = 'Учусь';
 	states[5] = 'rest.png'; 		statesT[5] = 'Отдыхаю';
 	states[6] = 'game.png'; 		statesT[6] = 'Играю';
 	states[7] = 'music.png';		statesT[7] = 'Слушаю музыку';
@@ -39,7 +39,9 @@ app.service('tools', function(){
 	states[11] = 'home.png';		statesT[11] = 'Дела по дому';
 	states[12] = 'read.png';		statesT[12] = 'Читаю';
 	states[13] = 'sleep.png';		statesT[13] = 'Сплю';
-	states[14] = 'pirat.png';		statesT[14] = 'Пират';
+	states[14] = 'water.png';		statesT[14] = 'Душ / ванна';
+	states[15] = 'walk.png';		statesT[15] = 'Гуляю';
+
 
 	privas[0] = 'empty.png'; 		privasT[0] = '';
 	privas[1] = 'admin.png'; 		privasT[1] = 'Админ';
@@ -60,6 +62,8 @@ app.service('tools', function(){
 
 
 	return {
+		states: states,
+		statesT: statesT,
 		tpl: function (tname, vars){
 			var template = templates[tname];
 			if(typeof vars == 'string') vars = [vars];

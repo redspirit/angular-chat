@@ -111,6 +111,7 @@ body{
 	bottom:0;
 	height:30px;
 	width:220px;
+    z-index: 6;
 }
 
 
@@ -352,7 +353,7 @@ button:hover {
 
 /* tools */
 
-.tools > div {
+.tools > div.item {
     float: left;
     width: 20px;
     height: 20px;
@@ -384,6 +385,42 @@ button:hover {
 .statustext-btn{
     background: url('../img/tools/status.png') no-repeat;
 }
-.status-btn{
-    background: url('../img/states/online.png') no-repeat;
+
+.states-menu{
+    visibility: hidden;
+    padding: 2px;
+    position: absolute;
+    background: rgb(213, 253, 223);
+    border: 1px solid rgb(185, 185, 185);
+    font-size: 12px;
+    opacity: 0;
+    z-index: 4;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transform: all 0.3s ease-in-out;
+    transform: all 0.3s ease-in-out;
+}
+.states-menu > div{
+    padding: 1px 3px 1px 22px;
+    margin-bottom: 1px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.states-menu > div:hover{
+    background-color: #96C4FF;
+}
+
+.show-item.states-menu{
+    opacity: 1;
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+
+
+
+
+.show-item{
+    visibility: visible;
 }

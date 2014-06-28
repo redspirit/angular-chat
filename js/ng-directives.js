@@ -42,18 +42,6 @@ app.directive('tabButton', function() {
 	}
 });
 
-app.directive('toolsPanel', function() {
-	return function($scope, elem, attrs) {
-
-		$scope.toolsItems = [
-			{name: 'one'},
-			{name: 'two'},
-			{name: 'thr'}
-		];
-
-	}
-});
-
 app.directive('errorNotify', function() {
 	return function($scope, elem) {
 
@@ -260,6 +248,40 @@ app.directive('wrapBlock', function(tools) {
 
 	}
 });
+
+app.directive('toolsState', function(tools, net) {
+	return function($scope, elem) {
+
+		$scope.getStateStyle = function(){
+			return {'background-image': 'url(img/states/' + tools.states[$scope.me.state] + ')'}
+		}
+
+		var menu = '';
+		for (var i in tools.states) {
+			menu += '<div state="' + i + '"  style="background-image: url(img/states/' + tools.states[i] + ')">' + tools.statesT[i] + '</div>';
+		}
+
+		elem.after('<div class="states-menu">' + menu + '</div>');
+		var menuElem = $('.states-menu');
+
+		elem.click(function(){
+			menuElem.addClass('show-item');
+		});
+		menuElem.on('mouseleave', function(){
+			menuElem.removeClass('show-item');
+		});
+		menuElem.on('click', 'div', function(){
+			var id = parseInt($(this).attr('state'));
+			menuElem.removeClass('show-item');
+
+			hitagi.setState(id);
+
+			$scope.me.state = id;
+			$scope.$apply();
+		});
+	}
+});
+
 
 
 app.directive('smileBlock', function() {
