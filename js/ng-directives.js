@@ -282,6 +282,33 @@ app.directive('toolsState', function(tools) {
 	}
 });
 
+app.directive('toolsStatus', function(tools) {
+	return function($scope, elem) {
+
+		elem.after('<div class="statustext-menu"><textarea placeholder="Введите сюда свой статусный текст"></textarea> ' +
+			'<input class="cancel-btn" type="button" value="Отмена" /> <input class="ok-btn" type="button" value="Сохранить" /></div>');
+		var e = $('.statustext-menu');
+
+		elem.click(function(){
+			e.find('textarea').val($scope.me.statustext);
+			e.addClass('show-item');
+		});
+		e.on('click', '.ok-btn', function(){
+			var text = e.find('textarea').val();
+			e.removeClass('show-item');
+			if($scope.me.statustext == text) return;
+			hitagi.setStatus(text);
+			$scope.me.statustext = text;
+		});
+		e.on('click', '.cancel-btn', function(){
+			e.removeClass('show-item');
+		});
+
+
+
+	}
+});
+
 app.directive('toolsSound', function(tools) {
 	return function($scope, elem) {
 

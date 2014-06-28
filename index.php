@@ -123,7 +123,7 @@
 		<div class="item smile-btn" ng-click="smileClick()"></div>
 		<div class="item" ng-class="soundClass()" tools-sound></div>
 		<div class="item" ng-class="notifClass()" tools-notif></div>
-		<div class="item statustext-btn" ng-click="statusTextClick()"></div>
+		<div class="item statustext-btn" tools-status></div>
 		<div class="item colors-btn" ng-click="colorsClick()"></div>
 	</div>
 </div>
