@@ -117,7 +117,6 @@ app.directive('roster', function() {
 	}
 });
 
-
 app.directive('posModal', function() {
 	return function($scope, elem) {
 
@@ -249,7 +248,7 @@ app.directive('wrapBlock', function(tools) {
 	}
 });
 
-app.directive('toolsState', function(tools, net) {
+app.directive('toolsState', function(tools) {
 	return function($scope, elem) {
 
 		$scope.getStateStyle = function(){
@@ -274,15 +273,50 @@ app.directive('toolsState', function(tools, net) {
 			var id = parseInt($(this).attr('state'));
 			menuElem.removeClass('show-item');
 
-			hitagi.setState(id);
+			if($scope.me.state == id) return;
 
+			hitagi.setState(id);
 			$scope.me.state = id;
 			$scope.$apply();
 		});
 	}
 });
 
+app.directive('toolsSound', function(tools) {
+	return function($scope, elem) {
 
+		$scope.soundMode = true;
+
+		$scope.soundClass = function(){
+			return {'sound-on': $scope.soundMode, 'sound-off': !$scope.soundMode}
+		}
+
+		elem.click(function(){
+			$scope.soundMode = !$scope.soundMode;
+			$scope.$apply();
+		});
+
+
+	}
+});
+
+app.directive('toolsNotif', function(tools) {
+	return function($scope, elem) {
+
+		$scope.notifMode = true;
+
+		$scope.notifClass = function(){
+			return {'notif-on': $scope.notifMode, 'notif-off': !$scope.notifMode}
+		}
+
+		elem.click(function(){
+			$scope.notifMode = !$scope.notifMode;
+			$scope.$apply();
+		});
+
+
+	}
+});
 
 app.directive('smileBlock', function() {
 

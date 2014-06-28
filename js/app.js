@@ -7,6 +7,7 @@ var hitagi;
 app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sounds){
 
 	var currentPosModal = 0;
+	$scope.tools = tools;
 	$scope.rooms = {};
 	$scope.me = {
 		login: 'u172144439',
@@ -377,29 +378,6 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		return $sce.trustAsHtml(m);
 	}
 
-
-	$scope.addroom = function(){
-		hitagi.join('public');
-	}
-	$scope.soundClick = function(){
-		soundEnabled = !soundEnabled;
-		$scope.toolpanel.soundCls = {'sound-on': soundEnabled, 'sound-off':!soundEnabled}
-	}
-	$scope.notifClick = function(){
-		notifEnabled = !notifEnabled;
-		$scope.toolpanel.notifCls = {'notif-on': notifEnabled, 'notif-off': !notifEnabled}
-	}
-
-
-	var soundEnabled = true;
-	var notifEnabled = true;
-
-	$scope.tools = tools;
-
-	$scope.toolpanel = {
-		soundCls: {'sound-on': soundEnabled, 'sound-off': !soundEnabled},
-		notifCls: {'notif-on': notifEnabled, 'notif-off': !notifEnabled}
-	};
 
 	$scope.messagesForms = {
 		0: 'Нет сообщений',
