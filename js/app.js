@@ -4,7 +4,7 @@ var activeRoom;
 var chatFocused = true;
 var hitagi;
 
-app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sounds){
+app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, tools, messageParser, sounds){
 
 	var currentPosModal = 0;
 	$scope.tools = tools;
@@ -74,6 +74,17 @@ app.controller('MainCtrl', function($scope, $sce, net, tools, messageParser, sou
 		$scope.rooms[data.name].type = 'room';
 		$scope.rooms[data.name].unread = 0;
 		$scope.rooms[data.name].last_mess = 0;
+
+		if(data.newmes > 0){
+			$scope.rooms[data.name].messages.push({
+				u: '',
+				t: tools.tpl('newmes', data.newmes),
+				n: '',
+				d: tools.timestamp(),
+				cls: {blue: true},
+				sys: 1
+			});
+		}
 
 		$scope.$apply();
 		activeRoom = data.name;

@@ -57,7 +57,8 @@ app.service('tools', function(){
 		setstatus: '<b>{1}</b> сменил статусный текст на: <b>{2}</b>',
 		settopic: '<p class="new-topic">Новый топик: <b>{1}</b></p>',
 		setavatar: '<b>{1}</b> сменил аватарку <img class="border-ava" src="{2}" alt="" />',
-		setnick: '<b>{1}</b> поставил себе новый ник: <b>{2}</b>'
+		setnick: '<b>{1}</b> поставил себе новый ник: <b>{2}</b>',
+		newmes: 'Пока вас не было, в комате написали <b>{1}</b> новых сообщений'
 	}
 
 
@@ -66,7 +67,7 @@ app.service('tools', function(){
 		statesT: statesT,
 		tpl: function (tname, vars){
 			var template = templates[tname];
-			if(typeof vars == 'string') vars = [vars];
+			if(typeof vars == 'string' || typeof vars == 'number') vars = [vars];
 			return template.replace(new RegExp('\{(.*?)\}','g'), function(a,b){
 				return vars[b-1];
 			})
