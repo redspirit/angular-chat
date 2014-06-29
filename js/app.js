@@ -280,9 +280,8 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 	hitagi.bind('setavatar', function(data){
 		var user;
 		for(var i in $scope.rooms) {
-			user = $scope.rooms[i].users[data.user];
-			if(user) {
-				user.avaurl = data.newnick;
+			if($scope.rooms[i].users[data.user]) {
+				$scope.rooms[i].users[data.user].avaurl = data.url;
 				$scope.rooms[i].messages.push({
 					u: '',
 					t: tools.tpl('setavatar', [nicks[data.user], data.url]),
@@ -299,9 +298,8 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 	hitagi.bind('setnick', function(data){
 		var user;
 		for(var i in $scope.rooms) {
-			user = $scope.rooms[i].users[data.user];
-			if(user) {
-				user.nick = data.newnick;
+			if($scope.rooms[i].users[data.user]) {
+				$scope.rooms[i].users[data.user].nick = data.newnick;
 				$scope.rooms[i].messages.push({
 					u: '',
 					t: tools.tpl('setnick', [nicks[data.user], data.newnick]),

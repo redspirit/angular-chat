@@ -120,7 +120,7 @@
 	</div>
 	<div class="tools" tool-spanel>
 		<div class="item" ng-style="getStateStyle()" tools-state></div>
-		<div class="item smile-btn" ng-click="smileClick()"></div>
+		<div class="item smile-btn" tools-smiles></div>
 		<div class="item" ng-class="soundClass()" tools-sound></div>
 		<div class="item" ng-class="notifClass()" tools-notif></div>
 		<div class="item statustext-btn" tools-status></div>

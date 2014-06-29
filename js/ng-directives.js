@@ -345,7 +345,7 @@ app.directive('toolsNotif', function(tools) {
 	}
 });
 
-app.directive('smileBlock', function() {
+app.directive('toolsSmiles', function() {
 
 	var smiles = {
 		1: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,
@@ -373,7 +373,64 @@ app.directive('smileBlock', function() {
 			191,192,193,194,195,196,197,198,199,200]
 	}
 
-	return function($scope, elem, attrs) {
+	return function($scope, elem) {
+
+		var tabs = '';
+		var tabContent = '';
+		for(var i in smiles) {
+			tabs += '<div tab="' + i +'">' + i +'</div>';
+
+			tabContent += '<div class="block-smile" cat="' + i + '">'
+			for(var j in smiles[i]) {
+				tabContent += '<img src="smiles/' + i + '/' + smiles[i][j] + '.gif" alt="" tab="' + i + '" num="' + smiles[i][j] + '" />';
+			}
+			tabContent += '</div>';
+
+		}
+
+
+
+		var blocks = '<div class="all-smiles"><div class="tab-smiles">' + tabs +'</div><div class="wrap-smiles">' + tabContent + '</div></div>' +
+			'<div>Последние используемые смайлики:</div><div class="fav-smiles">***</div>';
+
+		elem.after('<div class="smiles-menu">' + blocks + '</div>');
+		var e = $('.smiles-menu');
+		var shown = false;
+
+
+
+		$('.block-smile[cat=' + 1 +']').show();
+		$('.tab-smiles > div[tab=' + 1 +']').addClass('tab-smiles-active');
+
+
+		elem.click(function(){
+			if(shown) {
+				e.removeClass('show-item');
+			} else {
+				e.addClass('show-item');
+			}
+			shown = !shown;
+		});
+		e.on('click', '.tab-smiles > div', function(){
+			var tab = $(this).attr('tab');
+
+			$('.tab-smiles > div').removeClass('tab-smiles-active');
+			$(this).addClass('tab-smiles-active');
+
+			$('.block-smile').hide();
+			$('.block-smile[cat=' + tab +']').show();
+
+		});
+		e.on('click', '.block-smile img', function(){
+			var tab = $(this).attr('tab');
+			var num = $(this).attr('num');
+			var tag = ' *smile' + tab + '.' + num + '* ';
+
+			$scope.messageText = $scope.messageText + tag;
+			$scope.$apply();
+			$('.message-field').focus();
+
+		});
 
 
 

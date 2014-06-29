@@ -353,7 +353,7 @@ button:hover {
     background: #186CD6;
 }
 
-/* tools */
+/* TOOLS */
 
 .tools > div.item {
     float: left;
@@ -399,7 +399,8 @@ button:hover {
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transform: all 0.3s ease-in-out;
     transform: all 0.3s ease-in-out;
-    margin-top: -2px;
+    bottom: 35px;
+    margin-left: -20px;
     border-radius: 8px;
     box-shadow: 0px 0px 8px 0px rgba(50, 50, 50, 0.7);
 }
@@ -417,9 +418,6 @@ button:hover {
 
 .show-item.states-menu{
     opacity: 1;
-    -webkit-transform: translateY(-100%);
-    -moz-transform: translateY(-100%);
-    transform: translateY(-100%);
 }
 
 .statustext-menu{
@@ -449,6 +447,77 @@ button:hover {
 
 .show-item.statustext-menu{
     opacity: 1;
+}
+
+.smiles-menu{
+    visibility: hidden;
+    padding: 5px;
+    position: absolute;
+    background: #ffffff;
+    font-size: 12px;
+    opacity: 0;
+    z-index: 4;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transform: all 0.3s ease-in-out;
+    transform: all 0.3s ease-in-out;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px 0px rgba(50, 50, 50, 0.7);
+    bottom: 35px;
+    right: 5px;
+
+    height: 450px;
+    width: 300px;
+
+}
+.show-item.smiles-menu{
+    opacity: 1;
+}
+
+.smiles-menu .all-smiles{
+    height: 351px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgb(165, 165, 165);
+}
+.smiles-menu .fav-smiles{
+
+}
+.smiles-menu .tab-smiles{
+    float: left;
+    width: 25px;
+    height: 350px;
+}
+.smiles-menu .tab-smiles > div{
+    background-color: #47C3FD;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: white;
+}
+.smiles-menu .tab-smiles > div:hover{
+    background-color: #526DFA;
+}
+.smiles-menu div.tab-smiles-active{
+    background-color: #526DFA;
+}
+.smiles-menu .wrap-smiles{
+    padding-left: 5px;
+    height: 350px;
+    overflow-y: scroll;
+}
+.block-smile{
+    display: none;
+}
+.smiles-menu .block-smile img{
+    width: 42px;
+    height: 42px;
+    margin: 3px;
+    cursor: pointer;
+}
+img:hover{
+    -webkit-filter: invert(100%);
+
 }
 
 
