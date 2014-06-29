@@ -11,7 +11,8 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 	$scope.rooms = {};
 	$scope.me = {
 		login: 'u172144439',
-		state: 0
+		state: 0,
+		myColor: '000000'
 	}
 
 	var nicks = {};

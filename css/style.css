@@ -541,6 +541,41 @@ button:hover {
 .fav-smiles img:hover{
     -webkit-transform: rotate(-20deg);
 }
+
+.colors-menu{
+    visibility: hidden;
+    padding: 8px;
+    position: absolute;
+    background: #ffffff;
+    font-size: 12px;
+    opacity: 0;
+    z-index: 4;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transform: all 0.3s ease-in-out;
+    transform: all 0.3s ease-in-out;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px 0px rgba(50, 50, 50, 0.7);
+    bottom: 35px;
+    right: 5px;
+    width: 186px;
+}
+.show-item.colors-menu{
+    opacity: 1;
+}
+
+.color-brick{
+    width: 30px;
+    height: 30px;
+    margin: 0 4px 4px 0;
+    cursor: pointer;
+    float: left;
+}
+.color-brick:hover{
+    box-shadow: inset 0px 0px 10px 0px rgba(255, 255, 255, 1);
+}
+.colors-table{
+    overflow: hidden;
+}
 .show-item{
     visibility: visible;
 }

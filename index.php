@@ -74,7 +74,7 @@
 					<div ng-repeat="mess in room.messages">
 						<span class="m-date" id="{{mess.id}}" mtitle="{{mess.d*1000 | date:'d MMMM, hh:mm:ss'}}">{{mess.d*1000 | date:'hh:mm'}}</span>
 						<span class="m-nick">{{showNick(mess)}}</span>
-						<span class="m-text" ng-bind-html="messageHtmlParse(mess)" ng-class="mess.cls"></span>
+						<span class="m-text" ng-bind-html="messageHtmlParse(mess)" ng-class="mess.cls" ng-style="getMyColor(mess.u)"></span>
 						<div ng-if="mess.last" class="last-message"><span>Новые сообщения</span><hr /></div>
 					</div>
 				</div>
@@ -124,7 +124,7 @@
 		<div class="item" ng-class="soundClass()" tools-sound></div>
 		<div class="item" ng-class="notifClass()" tools-notif></div>
 		<div class="item statustext-btn" tools-status></div>
-		<div class="item colors-btn" ng-click="colorsClick()"></div>
+		<div class="item colors-btn" tools-colors></div>
 	</div>
 </div>
 

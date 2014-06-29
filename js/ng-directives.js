@@ -304,6 +304,60 @@ app.directive('toolsStatus', function(tools) {
 			e.removeClass('show-item');
 		});
 
+	}
+});
+
+app.directive('toolsColors', function(tools) {
+
+	var colors = ['000000', '000080', '00008B', '0000CD', '0000FF', '006400', '008000', '008080', '008B8B', '00BFFF',
+	 '191970', '1E90FF', '2F4F4F', '4169E1', '4682B4', '483D8B', '4B0082', '556B2F', '696969', '708090', '800000', '8B008B'
+		, '8B4513', '9400D3', 'A0522D', 'B8860B', 'C71585', 'D2691E', 'DC143C','ff0178'];
+
+	return function($scope, elem) {
+
+		var oldColor;
+		var table = '';
+		for (var i in colors) {
+			table += '<div class="color-brick" style="background-color: #' + colors[i] + '" code="' + colors[i] + '"></div>';
+		}
+
+
+		elem.after('<div class="colors-menu"><div class="colors-table">' + table + '</div>' +
+			'<div><input class="cancel-btn" type="button" value="Отмена" /> <input class="ok-btn" type="button" value="Сохранить" /></div></div>');
+		var e = $('.colors-menu');
+
+		elem.click(function(){
+			e.addClass('show-item');
+			oldColor = $scope.me.myColor;
+		});
+		e.on('click', '.color-brick', function(){
+			var code = $(this).attr('code');
+
+			$scope.me.myColor = code;
+			$scope.$apply();
+
+		});
+		e.on('click', '.ok-btn', function(){
+			e.removeClass('show-item');
+		});
+		e.on('click', '.cancel-btn', function(){
+			e.removeClass('show-item');
+			$scope.me.myColor = oldColor;
+			$scope.$apply();
+		});
+
+		$scope.getMyColor = function(user){
+
+			if($scope.me.login == user) {
+				return {
+					'color': '#' + $scope.me.myColor
+				}
+			} else {
+				return {};
+			}
+
+		}
+
 
 
 	}
@@ -379,16 +433,12 @@ app.directive('toolsSmiles', function() {
 		var tabContent = '';
 		for(var i in smiles) {
 			tabs += '<div tab="' + i +'">' + i +'</div>';
-
 			tabContent += '<div class="block-smile" cat="' + i + '">'
 			for(var j in smiles[i]) {
 				tabContent += '<img src="smiles/' + i + '/' + smiles[i][j] + '.gif" alt="" tab="' + i + '" num="' + smiles[i][j] + '" />';
 			}
 			tabContent += '</div>';
-
 		}
-
-
 
 		var blocks = '<div class="all-smiles"><div class="tab-smiles">' + tabs +'</div><div class="wrap-smiles">' + tabContent + '</div></div>' +
 			'<div>Последние используемые смайлики: <img src="img/show-smiles.png" class="show-smiles" alt="" /></div><div class="fav-smiles"></div>';
@@ -412,7 +462,6 @@ app.directive('toolsSmiles', function() {
 
 		$('.block-smile[cat=' + 1 +']').show();
 		$('.tab-smiles > div[tab=' + 1 +']').addClass('tab-smiles-active');
-
 
 		elem.click(function(){
 			if(shown) {
@@ -441,7 +490,6 @@ app.directive('toolsSmiles', function() {
 			$scope.messageText = $scope.messageText + tag;
 			$scope.$apply();
 			$('.message-field').focus();
-
 
 			stack.push({cat:tab, num:num});
 			if(stack.length > 6) stack.splice(0, 1);
