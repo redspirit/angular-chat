@@ -464,10 +464,7 @@ button:hover {
     box-shadow: 0px 0px 8px 0px rgba(50, 50, 50, 0.7);
     bottom: 35px;
     right: 5px;
-
-    height: 450px;
     width: 300px;
-
 }
 .show-item.smiles-menu{
     opacity: 1;
@@ -477,9 +474,10 @@ button:hover {
     height: 351px;
     margin-bottom: 5px;
     border-bottom: 1px solid rgb(165, 165, 165);
+    overflow: hidden;
 }
 .smiles-menu .fav-smiles{
-
+    height: 47px;
 }
 .smiles-menu .tab-smiles{
     float: left;
@@ -505,6 +503,7 @@ button:hover {
     padding-left: 5px;
     height: 350px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .block-smile{
     display: none;
@@ -514,14 +513,34 @@ button:hover {
     height: 42px;
     margin: 3px;
     cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
 }
-img:hover{
-    -webkit-filter: invert(100%);
-
+.smiles-menu .block-smile img:hover{
+    -webkit-transform: rotate(-20deg);
 }
-
-
-
+.show-smiles{
+    float: right;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transform: all 0.3s ease-in-out;
+    transform: all 0.3s ease-in-out;
+}
+.smiles-arrow-rotate{
+    -webkit-transform: rotate(180deg);
+}
+.fav-smiles img{
+    width: 42px;
+    height: 42px;
+    margin-right: 5px;
+    margin-top: 3px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transform: all 0.3s ease-in-out;
+    transform: all 0.3s ease-in-out;
+}
+.fav-smiles img:hover{
+    -webkit-transform: rotate(-20deg);
+}
 .show-item{
     visibility: visible;
 }

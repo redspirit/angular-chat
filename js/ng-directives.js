@@ -391,13 +391,24 @@ app.directive('toolsSmiles', function() {
 
 
 		var blocks = '<div class="all-smiles"><div class="tab-smiles">' + tabs +'</div><div class="wrap-smiles">' + tabContent + '</div></div>' +
-			'<div>Последние используемые смайлики:</div><div class="fav-smiles">***</div>';
+			'<div>Последние используемые смайлики: <img src="img/show-smiles.png" class="show-smiles" alt="" /></div><div class="fav-smiles"></div>';
 
 		elem.after('<div class="smiles-menu">' + blocks + '</div>');
 		var e = $('.smiles-menu');
 		var shown = false;
+		var expand = true;
+		var stack;
 
-
+		if(localStorage.favSmiles){
+			var stk = '';
+			stack = JSON.parse(localStorage.favSmiles);
+			for(var n = stack.length; n--;){
+				stk += '<img src="smiles/' + stack[n].cat + '/' + stack[n].num + '.gif" alt="" tab="' + stack[n].cat + '" num="' + stack[n].num + '" />';
+			}
+			$('.fav-smiles').html(stk);
+		} else {
+			stack = [];
+		}
 
 		$('.block-smile[cat=' + 1 +']').show();
 		$('.tab-smiles > div[tab=' + 1 +']').addClass('tab-smiles-active');
@@ -425,13 +436,42 @@ app.directive('toolsSmiles', function() {
 			var tab = $(this).attr('tab');
 			var num = $(this).attr('num');
 			var tag = ' *smile' + tab + '.' + num + '* ';
+			var stk = '';
 
 			$scope.messageText = $scope.messageText + tag;
 			$scope.$apply();
 			$('.message-field').focus();
 
-		});
 
+			stack.push({cat:tab, num:num});
+			if(stack.length > 6) stack.splice(0, 1);
+			for(var n = stack.length; n--;){
+				stk += '<img src="smiles/' + stack[n].cat + '/' + stack[n].num + '.gif" alt="" tab="' + stack[n].cat + '" num="' + stack[n].num + '" />';
+			}
+			$('.fav-smiles').html(stk);
+
+			localStorage.favSmiles = JSON.stringify(stack);
+
+		});
+		e.on('click', '.show-smiles', function(){
+			if (expand) {
+				$('.all-smiles').hide();
+				$('.show-smiles').addClass('smiles-arrow-rotate');
+			} else {
+				$('.all-smiles').show();
+				$('.show-smiles').removeClass('smiles-arrow-rotate');
+			}
+			expand = !expand;
+		});
+		e.on('click', '.fav-smiles img', function(){
+			var tab = $(this).attr('tab');
+			var num = $(this).attr('num');
+			var tag = ' *smile' + tab + '.' + num + '* ';
+
+			$scope.messageText = $scope.messageText + tag;
+			$scope.$apply();
+			$('.message-field').focus();
+		});
 
 
 	}
