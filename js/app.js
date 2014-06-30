@@ -323,6 +323,12 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 		}
 
 	});
+    hitagi.bind('getroomlist', function(data){
+
+		$scope.roomsList = data.list;
+        $scope.$apply();
+
+	});
 
 
 
@@ -368,6 +374,10 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 
 	}
 
+
+    $scope.getRoomsList = function(){
+        hitagi.getRoomsList();
+    }
 
     // todo использовать только поле bot
     $scope.showNick = function(mess) {

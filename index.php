@@ -63,7 +63,7 @@
 				<img class="tab-close" src="img/tab-close.png" alt="" />
 			</li>
 			<li class="new-room">
-				<img src="img/plus.png" alt="" title="Открыть новую комнату" ng-click="addroom()"/>
+				<img src="img/plus.png" alt="" title="Открыть новую комнату" ng-click="showModal('open_room');getRoomsList()"/>
  			</li>
 		</ul>
 

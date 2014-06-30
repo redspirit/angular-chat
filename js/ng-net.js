@@ -131,10 +131,13 @@ app.service('net', function(){
 				type:'gethistory'
 			});
 		}
-
+        this.getRoomList = function(){
+			self.send({
+				type:'getroomlist'
+			});
+		}
 
 	}
-
 
 
 
