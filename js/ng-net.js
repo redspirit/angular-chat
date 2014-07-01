@@ -133,7 +133,7 @@ app.service('net', function(){
 		}
         this.getRoomList = function(){
 			self.send({
-				type:'getroomlist'
+				type:'getroomslist'
 			});
 		}
 

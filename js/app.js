@@ -323,10 +323,22 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 		}
 
 	});
-    hitagi.bind('getroomlist', function(data){
+    hitagi.bind('getroomslist', function(data){
 
-		$scope.roomsList = data.list;
-        $scope.$apply();
+		// todo передавать список комнат в видео массива а не обьекта
+		var list2 = []
+		for (var i in data.list) {
+			data.list[i].name = i;
+			list2.push(data.list[i])
+		}
+
+		console.log(list2);
+
+		$scope.roomsList = list2;
+
+		$scope.showModal('open_room');
+
+		$scope.$apply();
 
 	});
 
@@ -376,7 +388,7 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 
 
     $scope.getRoomsList = function(){
-        hitagi.getRoomsList();
+        hitagi.getRoomList();
     }
 
     // todo использовать только поле bot
