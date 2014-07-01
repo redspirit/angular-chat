@@ -7,13 +7,16 @@ var hitagi;
 app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, tools, messageParser, sounds){
 
 	var currentPosModal = 0;
-	$scope.tools = tools;
+	var savedRooms = localStorage.savedRooms ? JSON.parse(localStorage.savedRooms) : {};
+    $scope.tools = tools;
 	$scope.rooms = {};
 	$scope.me = {
 		login: 'u172144439',
 		state: 0,
 		myColor: '000000'
 	}
+
+
 
 	var nicks = {};
 	var roomsIndex = 0;
@@ -42,8 +45,11 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 		}
 		$scope.$apply();
 
-		hitagi.join('gruppa_s_');
-		//hitagi.join('public');
+
+        for(var i in savedRooms) {
+            hitagi.join(i);
+        }
+
 	});
 	hitagi.bind('chat', function(data){
 
@@ -94,7 +100,12 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 			nicks[i] = data.users[i].nick;
 		}
 
+
+        savedRooms[activeRoom] = roomsIndex;
+        localStorage.savedRooms = JSON.stringify(savedRooms);
+
 		tools.selectRoom(activeRoom);
+        $scope.hideModal();
 
 	});
 	hitagi.bind('userjoined', function(data){
@@ -135,6 +146,9 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 	hitagi.bind('leaveroom', function(data){
 		delete $scope.rooms[data.room];
 		$scope.$apply();
+
+        delete savedRooms[activeRoom];
+        localStorage.savedRooms = JSON.stringify(savedRooms);
 
 		activeRoom = tools.getFirst($scope.rooms);
 		tools.selectRoom(activeRoom);
@@ -383,12 +397,20 @@ app.controller('MainCtrl', function($scope, $sce, $parse, $interpolate, net, too
 		activeRoom = tools.getFirst($scope.rooms);
 		tools.selectRoom(activeRoom);
 
-
 	}
-
 
     $scope.getRoomsList = function(){
         hitagi.getRoomList();
+    }
+
+    $scope.selectRoom = function(room){
+
+        if($scope.rooms[room]) {
+            alert('вы уже в этой комнате');
+        } else {
+            hitagi.join(room);
+        }
+
     }
 
     // todo использовать только поле bot

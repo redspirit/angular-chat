@@ -1,8 +1,9 @@
 <h3>Войти в комнату</h3>
 <div>
 
-    <div ng-repeat="item in roomsList | orderBy:'userscount':1">
-        <div>{{item.caption}}</div>
+    <div ng-repeat="item in roomsList | orderBy:'userscount':1" class="room-list">
+        <a href="#" ng-click="selectRoom(item.name)">{{item.caption}}</a> ({{item.userscount}}) <br>
+        <span>{{item.topic}}</span>
     </div>
 
     <button ng-click="hideModal()">Close me!</button>
